@@ -1,32 +1,35 @@
 :root {
-  /* Core Surfaces — Monochrome Scale */
-  --bg-primary: #000000;
-  --bg-secondary: #0A0A0A;
-  --bg-tertiary: #111111;
-  --bg-panel: #0d0d0d;
-  --bg-elevated: #161616;
-  --bg-surface: #1C1C1C;
+  /* Core Surfaces — Production White Scale */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #FAFAFA;
+  --bg-tertiary: #F7F7F5;
+  --bg-panel: #FFFFFF;
+  --bg-elevated: #FFFFFF;
+  --bg-surface: #F2F2F0;
 
-  /* Accent — Restrained functional green (used sparingly) */
-  --accent: #2A9D5C;
-  --accent-dim: rgba(42, 157, 92, 0.15);
-  --accent-subtle: rgba(42, 157, 92, 0.08);
+  /* Accent — Refined, sophisticated green */
+  --accent: #1D8A50;
+  --accent-dim: rgba(29, 138, 80, 0.1);
+  --accent-subtle: rgba(29, 138, 80, 0.05);
+  --accent-hover: #167040;
 
   /* Text Hierarchy */
-  --text-primary: #FFFFFF;
-  --text-secondary: #CFCFCF;
-  --text-muted: #666666;
-  --text-dim: #8A8A8A;
+  --text-primary: #050505;
+  --text-secondary: #333333;
+  --text-muted: #555555;
+  --text-dim: #888888;
+  --text-inverse: #FFFFFF;
 
-  /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.18);
+  /* Borders — Subtle Neutral Grays */
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.12);
+  --border-strong: rgba(0, 0, 0, 0.2);
+  --border-focus: var(--accent);
 
   /* Status Colors */
-  --status-success: #2A9D5C;
-  --status-warning: #D4A853;
-  --status-error: #D94F4F;
+  --status-success: #1D8A50;
+  --status-warning: #B37D26;
+  --status-error: #D14343;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -38,13 +41,18 @@
   --spacing-3xl: 8rem;
 
   /* Radii */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   
   /* Typography */
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), 'SF Mono', 'Cascadia Code', monospace;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -82,7 +90,7 @@ a {
   text-decoration: none;
 }
 
-/* Minimal Grid Background — very subtle white */
+/* Minimal Grid Background — White theme */
 body::before {
   content: '';
   position: fixed;
@@ -91,8 +99,8 @@ body::before {
   width: 100vw;
   height: 100vh;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
   background-size: 60px 60px;
   z-index: -1;
   pointer-events: none;
@@ -115,7 +123,7 @@ body::before {
   font-family: var(--font-mono);
 }
 
-/* Animations — Monochrome */
+/* Animations — Clean, Subtle */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -126,23 +134,18 @@ body::before {
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-@keyframes typing {
+@keyframes progressBar {
   from { width: 0; }
   to { width: 100%; }
-}
-
-@keyframes subtlePulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
 }
 
 .animate-fade-in {
