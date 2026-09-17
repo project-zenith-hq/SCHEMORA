@@ -6,7 +6,7 @@ SCHEMORA is an AI-powered platform that helps entrepreneurs discover, understand
 
 ### Core Features
 
-- AI-powered natural language understanding
+- AI-powered natural language understanding 
 - Entrepreneur profile creation
 - Government scheme discovery
 - Eligibility analysis
