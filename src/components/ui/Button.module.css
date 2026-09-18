@@ -3,10 +3,18 @@
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
   outline: none;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--border-focus);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.99) !important;
 }
 
 .button:disabled {
@@ -24,8 +32,8 @@
 .primary:hover:not(:disabled) {
   background-color: var(--accent-hover);
   border-color: var(--accent-hover);
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(245, 184, 0, 0.2);
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(245, 184, 0, 0.15);
 }
 
 .secondary {
@@ -37,7 +45,7 @@
 .secondary:hover:not(:disabled) {
   background-color: var(--text-primary);
   color: var(--bg-primary);
-  transform: scale(1.02);
+  transform: scale(1.01);
 }
 
 .outline {

@@ -306,8 +306,8 @@
 }
 
 .textInput:focus, .selectInput:focus, .textareaInput:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 1px var(--border-focus);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
   background-color: var(--bg-primary);
 }
 
@@ -401,6 +401,7 @@
 
 .hudMetricValue {
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -850,7 +851,8 @@
 
 .schemeCard:hover {
   border-color: var(--border-strong);
-  box-shadow: 0 8px 30px var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 .schemeCardEligible {
@@ -1075,7 +1077,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
 .modalTopBar {
