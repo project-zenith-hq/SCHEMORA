@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "home": "হোম",
+    "howItWorks": "কীভাবে কাজ করে",
+    "exploreSchemes": "প্রকল্প খুঁজুন",
+    "resources": "সম্পদ",
+    "about": "আমাদের সম্পর্কে",
+    "startAssessment": "মূল্যায়ন শুরু করুন",
+    "openSettings": "সেটিংস খুলুন",
+    "menu": "মেনু"
+  },
+  "hero": {
+    "headlineHighlight": "ম্যাচ। ফান্ড। গ্রো।",
+    "headlineText": "আপনার ব্যবসা।",
+    "subheadline": "ক্ষুদ্র উদ্যোক্তাদের সরাসরি রাজ্য ও কেন্দ্রীয় সরকারি প্রকল্পের সাথে সংযুক্ত করার একটি বুদ্ধিমান ইঞ্জিন।",
+    "ctaStart": "আপনার মূল্যায়ন শুরু করুন",
+    "ctaExplore": "প্রকল্প খুঁজুন",
+    "engineStats": {
+      "schemes": "সক্রিয় প্রকল্প",
+      "successRate": "ম্যাচ রেট",
+      "banks": "নোডাল ব্যাঙ্ক"
+    }
+  },
+  "settings": {
+    "title": "পছন্দসমূহ",
+    "close": "সেটিংস বন্ধ করুন",
+    "appearance": "চেহারা",
+    "theme": "থিম",
+    "themeDesc": "আপনার ভিজ্যুয়াল স্টাইল চয়ন করুন",
+    "themeOptions": {
+      "light": "লাইট",
+      "dark": "ডার্ক",
+      "system": "সিস্টেম"
+    },
+    "density": "তথ্য ঘনত্ব",
+    "densityDesc": "স্পেসিং স্কেল সামঞ্জস্য করুন",
+    "densityOptions": {
+      "comfortable": "আরামদায়ক",
+      "compact": "কমপ্যাক্ট"
+    },
+    "accessibility": "অ্যাক্সেসিবিলিটি এবং ভাষা",
+    "language": "পছন্দের ভাষা",
+    "languageDesc": "অ্যাসিস্ট্যান্ট এবং কন্টেন্ট লোকালাইজেশন",
+    "reduceMotion": "মোশন কমান",
+    "reduceMotionDesc": "অপ্রয়োজনীয় অ্যানিমেশন নিষ্ক্রিয় করুন",
+    "session": "সেশন",
+    "clearProgress": "মূল্যায়ন অগ্রগতি মুছুন",
+    "clearProgressConfirm": "আপনি কি নিশ্চিত যে আপনি আপনার মূল্যায়নের অগ্রগতি মুছতে চান? এটি পূর্বাবস্থায় ফিরিয়ে আনা যাবে না।",
+    "version": "SCHEMORA প্ল্যাটফর্ম v0.1.0-beta"
+  },
+  "map": {
+    "searchPlaceholder": "আপনার রাজ্য খুঁজুন...",
+    "zoomIn": "জুম ইন",
+    "zoomOut": "জুম আউট",
+    "resetView": "ভিউ রিসেট করুন",
+    "eligibleSchemes": "যোগ্য প্রকল্প",
+    "channelPartners": "চ্যানেল পার্টনার",
+    "topSchemes": "শীর্ষ উপলব্ধ প্রকল্প",
+    "viewAllIn": "সব দেখুন:",
+    "noNodeData": "এই রাজ্যের জন্য এখনও কোনও শক্তিশালী নোডাল ডেটা ম্যাপ করা হয়নি। কভারেজ সক্রিয়ভাবে বাড়ছে।",
+    "activeHub": "সক্রিয় হাব",
+    "coverageStatus": "কভারেজ স্ট্যাটাস",
+    "noNodeDataLegend": "নোড ডেটা নেই",
+    "active": "সক্রিয়"
+  }
+}

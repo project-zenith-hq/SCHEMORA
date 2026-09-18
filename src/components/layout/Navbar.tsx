@@ -6,17 +6,19 @@ import { usePathname } from 'next/navigation';
 import { Button } from '../ui/Button';
 import styles from './Navbar.module.css';
 import { useSettings } from '@/context/SettingsContext';
+import { useTranslation } from '@/context/TranslationContext';
 
 export function Navbar() {
   const pathname = usePathname();
   const { setIsSettingsOpen } = useSettings();
+  const { t } = useTranslation();
 
   const links = [
-    { label: 'Home', href: '/' },
-    { label: 'How It Works', href: '/#how-it-works' },
-    { label: 'Explore Schemes', href: '/explore' },
-    { label: 'Resources', href: '/#resources' },
-    { label: 'About', href: '/about' },
+    { label: t('nav.home'), href: '/' },
+    { label: t('nav.howItWorks'), href: '/#how-it-works' },
+    { label: t('nav.exploreSchemes'), href: '/explore' },
+    { label: t('nav.resources'), href: '/#resources' },
+    { label: t('nav.about'), href: '/about' },
   ];
 
   return (
@@ -43,18 +45,18 @@ export function Navbar() {
           <button 
             className={styles.settingsBtn}
             onClick={() => setIsSettingsOpen(true)}
-            aria-label="Open Settings"
-            title="Settings"
+            aria-label={t('nav.openSettings')}
+            title={t('nav.settings')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
             </svg>
           </button>
           <Link href="/assessment" className={styles.desktopOnly}>
-            <Button variant="primary" size="sm">Start Assessment</Button>
+            <Button variant="primary" size="sm">{t('nav.startAssessment')}</Button>
           </Link>
-          <button className={styles.mobileMenuBtn} aria-label="Menu">
+          <button className={styles.mobileMenuBtn} aria-label={t('nav.menu')}>
             ☰
           </button>
         </div>

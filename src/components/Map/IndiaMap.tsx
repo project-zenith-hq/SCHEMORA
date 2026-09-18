@@ -1,8 +1,28 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { ComposableMap, Geographies, Geography, ZoomableGroup, Marker } from "react-simple-maps";
+import { scaleQuantile } from "d3-scale";
 import styles from "./IndiaMap.module.css";
+import { useTranslation } from "@/context/TranslationContext";
+
+// TopoJSON from a reliable source (simplified India map)
+const INDIA_TOPO_JSON = "https://raw.githubusercontent.com/Anujarya300/bubble_maps/master/data/india-topojson.json";
+
+// Mock data indicating nodal presence / active schemes by state
+const mockData = [
+  { id: "MH", state: "Maharashtra", value: 120, active: true },
+  { id: "GJ", state: "Gujarat", value: 85, active: true },
+  { id: "KA", state: "Karnataka", value: 95, active: true },
+  { id: "TN", state: "Tamil Nadu", value: 110, active: true },
+  { id: "DL", state: "Delhi", value: 60, active: true },
+  { id: "UP", state: "Uttar Pradesh", value: 45, active: true },
+  { id: "WB", state: "West Bengal", value: 70, active: true },
+  { id: "TS", state: "Telangana", value: 80, active: true },
+  { id: "HR", state: "Haryana", value: 55, active: true },
+  { id: "MP", state: "Madhya Pradesh", value: 40, active: true },
+  { id: "RJ", state: "Rajasthan", value: 50, active: true },
+];
 
 const geoUrl = "/india-states.json";
 
@@ -33,6 +53,8 @@ export default function IndiaMap() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -55,14 +77,11 @@ export default function IndiaMap() {
   };
 
   const handleStateClick = (stateName: string, geo: any) => {
-    // Zoom to state - simplistic bounds (in a real app, use d3-geo bounds on the geography)
-    // Here we use pre-defined center if available, otherwise just use standard center
     const data = stateData[stateName];
     if (data?.coords) {
       setPosition({ coordinates: data.coords, zoom: 3 });
       setActiveStateDetails(stateName);
     } else {
-      // Just open details without zooming if we don't have coords
       setActiveStateDetails(stateName);
     }
   };
@@ -94,7 +113,7 @@ export default function IndiaMap() {
           </svg>
           <input 
             type="text" 
-            placeholder="Search your state..." 
+            placeholder={t('map.searchPlaceholder')}
             className={styles.searchInput}
             value={searchQuery}
             onChange={(e) => {
@@ -180,7 +199,6 @@ export default function IndiaMap() {
                         setTooltip({ content: null, x: 0, y: 0 });
                       }}
                       onClick={() => handleStateClick(stateName, geo)}
-                      // In v3+, standard style props are passed directly to <path>
                       fill={fillColor}
                       stroke={isActive || isHovered ? "var(--text-primary)" : "var(--text-secondary)"}
                       strokeWidth={isActive || isHovered ? 1 : 0.5}
@@ -211,13 +229,13 @@ export default function IndiaMap() {
 
       {/* Map Controls */}
       <div className={styles.mapControls}>
-        <button className={styles.controlBtn} onClick={handleZoomIn} aria-label="Zoom In">
+        <button className={styles.controlBtn} onClick={handleZoomIn} aria-label={t('map.zoomIn')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </button>
-        <button className={styles.controlBtn} onClick={handleZoomOut} aria-label="Zoom Out">
+        <button className={styles.controlBtn} onClick={handleZoomOut} aria-label={t('map.zoomOut')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </button>
-        <button className={styles.controlBtn} onClick={handleReset} aria-label="Reset View">
+        <button className={styles.controlBtn} onClick={handleReset} aria-label={t('map.resetView')}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
         </button>
       </div>
@@ -237,29 +255,29 @@ export default function IndiaMap() {
               <div className={styles.panelStatGroup}>
                 <div className={styles.panelStatBox}>
                   <div className={styles.panelStatValue}>{stateData[activeStateDetails]?.schemes || 0}</div>
-                  <div className={styles.panelStatLabel}>Eligible Schemes</div>
+                  <div className={styles.panelStatLabel}>{t('map.eligibleSchemes')}</div>
                 </div>
                 <div className={styles.panelStatBox}>
                   <div className={styles.panelStatValue}>{stateData[activeStateDetails]?.partners || 0}</div>
-                  <div className={styles.panelStatLabel}>Channel Partners</div>
+                  <div className={styles.panelStatLabel}>{t('map.channelPartners')}</div>
                 </div>
               </div>
 
               {stateData[activeStateDetails]?.schemes > 0 && (
                 <div className={styles.panelSection}>
-                  <h4 className={styles.panelSectionTitle}>Top Available Schemes</h4>
+                  <h4 className={styles.panelSectionTitle}>{t('map.topSchemes')}</h4>
                   <ul className={styles.schemeList}>
                     <li>Prime Minister's Employment Generation Programme (PMEGP)</li>
                     <li>Pradhan Mantri MUDRA Yojana (PMMY)</li>
                     <li>Stand-Up India Scheme</li>
                   </ul>
-                  <button className={styles.panelActionBtn}>View All in {activeStateDetails} &rarr;</button>
+                  <button className={styles.panelActionBtn}>{t('map.viewAllIn')} {activeStateDetails} &rarr;</button>
                 </div>
               )}
               
               {!stateData[activeStateDetails] && (
                 <div className={styles.panelEmpty}>
-                  No robust nodal data mapped for this state yet. Coverage is actively expanding.
+                  {t('map.noNodeData')}
                 </div>
               )}
             </div>
@@ -267,7 +285,7 @@ export default function IndiaMap() {
         )}
       </div>
 
-      {/* Tooltip (Only show if neither searching nor panel open so it's not messy) */}
+      {/* Tooltip */}
       <div
         className={`${styles.tooltip} ${tooltip.content && !activeStateDetails ? styles.visible : ""}`}
         style={{ left: tooltip.x, top: tooltip.y }}
@@ -277,15 +295,15 @@ export default function IndiaMap() {
             <div className={styles.tooltipTitle}>
               <span>{tooltip.content.name}</span>
               {tooltip.content.schemes > 0 && (
-                <span style={{ color: 'var(--accent)' }}>Active</span>
+                <span style={{ color: 'var(--accent)' }}>{t('map.active')}</span>
               )}
             </div>
             <div className={styles.tooltipRow}>
-              <span className={styles.tooltipLabel}>Eligible Schemes</span>
+              <span className={styles.tooltipLabel}>{t('map.eligibleSchemes')}</span>
               <span className={styles.tooltipValue}>{tooltip.content.schemes}</span>
             </div>
             <div className={styles.tooltipRow}>
-              <span className={styles.tooltipLabel}>Channel Partners</span>
+              <span className={styles.tooltipLabel}>{t('map.channelPartners')}</span>
               <span className={styles.tooltipValue}>{tooltip.content.partners}</span>
             </div>
           </>
@@ -294,14 +312,14 @@ export default function IndiaMap() {
 
       {/* Legend */}
       <div className={styles.legend}>
-        <div className={styles.legendTitle}>Coverage Status</div>
+        <div className={styles.legendTitle}>{t('map.coverageStatus')}</div>
         <div className={styles.legendItem}>
           <div className={styles.legendColor} style={{ backgroundColor: 'var(--accent)' }} />
-          <span>Active Hub (6+ Schemes)</span>
+          <span>{t('map.activeHub')} (6+ Schemes)</span>
         </div>
         <div className={styles.legendItem}>
           <div className={styles.legendColor} style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-strong)' }} />
-          <span>No Node Data</span>
+          <span>{t('map.noNodeDataLegend')}</span>
         </div>
       </div>
     </div>

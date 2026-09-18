@@ -1,27 +1,25 @@
 "use client";
 
 import React, { useEffect } from 'react';
+import { useSettings } from '@/context/SettingsContext';
+import { useTranslation } from '@/context/TranslationContext';
 import styles from './SettingsPanel.module.css';
-import { useSettings, ThemeType, DensityType } from '@/context/SettingsContext';
-import { useAssessment } from '@/context/AssessmentContext';
 
 export function SettingsPanel() {
   const { 
     isSettingsOpen, 
     setIsSettingsOpen,
-    theme,
+    theme, 
     setTheme,
     density,
     setDensity,
     reduceMotion,
-    setReduceMotion,
-    language,
-    setLanguage
+    setReduceMotion
   } = useSettings();
 
-  const { resetProfile } = useAssessment();
+  const { language, setLanguage, t, supportedLocales, isTranslating } = useTranslation();
 
-  // Close on Escape key
+  // Handle escape key to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isSettingsOpen) {
@@ -34,120 +32,154 @@ export function SettingsPanel() {
 
   if (!isSettingsOpen) return null;
 
-  const handleClearProgress = () => {
-    if (window.confirm("Are you sure you want to clear your assessment progress? This cannot be undone.")) {
-      resetProfile();
-      setIsSettingsOpen(false);
-    }
-  };
-
   return (
-    <div className={`${styles.overlay} ${isSettingsOpen ? styles.open : ''}`} onClick={() => setIsSettingsOpen(false)}>
-      <div className={styles.panel} onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div className={styles.overlay} onClick={() => setIsSettingsOpen(false)}>
+      <div 
+        className={`${styles.panel} ${isSettingsOpen ? styles.panelOpen : ''}`} 
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+      >
         <div className={styles.header}>
-          <h2 id="settings-title" className={styles.title}>Preferences</h2>
-          <button className={styles.closeButton} onClick={() => setIsSettingsOpen(false)} aria-label="Close Settings">
-            &times;
+          <h2 id="settings-title" className={styles.title}>{t('settings.title')}</h2>
+          <button 
+            className={styles.closeBtn} 
+            onClick={() => setIsSettingsOpen(false)}
+            aria-label={t('settings.close')}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
           </button>
         </div>
 
         <div className={styles.content}>
-          
-          {/* Appearance Section */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Appearance</h3>
+          {/* Theme Section */}
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h3>{t('settings.appearance')}</h3>
+            </div>
             
-            <div className={styles.settingRow}>
+            <div className={styles.settingItem}>
               <div className={styles.settingInfo}>
-                <span className={styles.settingName}>Theme</span>
-                <span className={styles.settingDesc}>Choose your visual style</span>
+                <label>{t('settings.theme')}</label>
+                <span className={styles.desc}>{t('settings.themeDesc')}</span>
               </div>
               <div className={styles.segmentedControl}>
-                {(['light', 'dark', 'system'] as ThemeType[]).map(t => (
-                  <button
-                    key={t}
-                    className={`${styles.segmentButton} ${theme === t ? styles.active : ''}`}
-                    onClick={() => setTheme(t)}
-                  >
-                    {t.charAt(0).toUpperCase() + t.slice(1)}
-                  </button>
-                ))}
+                <button 
+                  className={theme === 'light' ? styles.activeSegment : ''} 
+                  onClick={() => setTheme('light')}
+                >
+                  {t('settings.themeOptions.light')}
+                </button>
+                <button 
+                  className={theme === 'dark' ? styles.activeSegment : ''} 
+                  onClick={() => setTheme('dark')}
+                >
+                  {t('settings.themeOptions.dark')}
+                </button>
+                <button 
+                  className={theme === 'system' ? styles.activeSegment : ''} 
+                  onClick={() => setTheme('system')}
+                >
+                  {t('settings.themeOptions.system')}
+                </button>
               </div>
             </div>
 
-            <div className={styles.settingRow}>
+            <div className={styles.settingItem}>
               <div className={styles.settingInfo}>
-                <span className={styles.settingName}>Information Density</span>
-                <span className={styles.settingDesc}>Adjust spacing scale</span>
+                <label>{t('settings.density')}</label>
+                <span className={styles.desc}>{t('settings.densityDesc')}</span>
               </div>
               <div className={styles.segmentedControl}>
-                {(['comfortable', 'compact'] as DensityType[]).map(d => (
-                  <button
-                    key={d}
-                    className={`${styles.segmentButton} ${density === d ? styles.active : ''}`}
-                    onClick={() => setDensity(d)}
-                  >
-                    {d.charAt(0).toUpperCase() + d.slice(1)}
-                  </button>
-                ))}
+                <button 
+                  className={density === 'comfortable' ? styles.activeSegment : ''} 
+                  onClick={() => setDensity('comfortable')}
+                >
+                  {t('settings.densityOptions.comfortable')}
+                </button>
+                <button 
+                  className={density === 'compact' ? styles.activeSegment : ''} 
+                  onClick={() => setDensity('compact')}
+                >
+                  {t('settings.densityOptions.compact')}
+                </button>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Localization & Accessibility */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Accessibility & Locale</h3>
+          {/* Accessibility & Language Section */}
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h3>{t('settings.accessibility')}</h3>
+            </div>
             
-            <div className={styles.settingRow}>
+            <div className={styles.settingItem}>
               <div className={styles.settingInfo}>
-                <span className={styles.settingName}>Preferred Language</span>
-                <span className={styles.settingDesc}>Assistant & content localization</span>
+                <label>{t('settings.language')} {isTranslating && <span className={styles.loadingPulse}>...</span>}</label>
+                <span className={styles.desc}>{t('settings.languageDesc')}</span>
               </div>
-              <select 
-                className={styles.select}
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-              >
-                <option value="English">English</option>
-                <option value="Hindi">Hindi (हिंदी)</option>
-                <option value="Bengali">Bengali (বাংলা)</option>
-                <option value="Marathi">Marathi (मराठी)</option>
-                <option value="Telugu">Telugu (తెలుగు)</option>
-                <option value="Tamil">Tamil (தமிழ்)</option>
-              </select>
+              <div className={styles.selectWrapper}>
+                <select 
+                  className={styles.selectInput}
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                >
+                  <optgroup label="Verified Translations">
+                    {supportedLocales.filter(l => l.isStatic).map(l => (
+                      <option key={l.code} value={l.code}>
+                        {l.nativeName} ({l.name})
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+              </div>
             </div>
 
-            <div className={styles.settingRow}>
+            <div className={styles.settingItem}>
               <div className={styles.settingInfo}>
-                <span className={styles.settingName}>Reduce Motion</span>
-                <span className={styles.settingDesc}>Disable non-essential animations</span>
+                <label>{t('settings.reduceMotion')}</label>
+                <span className={styles.desc}>{t('settings.reduceMotionDesc')}</span>
               </div>
               <button 
-                className={styles.switch}
-                role="switch"
-                aria-checked={reduceMotion}
+                className={`${styles.switch} ${reduceMotion ? styles.switchOn : ''}`}
                 onClick={() => setReduceMotion(!reduceMotion)}
+                aria-pressed={reduceMotion}
               >
-                <span className={styles.switchThumb} />
+                <span className={styles.switchThumb}></span>
               </button>
             </div>
-          </div>
+          </section>
 
-          {/* Data & Session */}
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Session</h3>
+          {/* Session/Data Section */}
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <h3>{t('settings.session')}</h3>
+            </div>
             
-            <div className={styles.settingRow}>
-              <button className={styles.dangerAction} onClick={handleClearProgress}>
-                Clear Assessment Progress
+            <div className={styles.settingItem}>
+              <button 
+                className={styles.dangerBtn}
+                onClick={() => {
+                  if (confirm(t('settings.clearProgressConfirm'))) {
+                    // Reset assessment logic here
+                    localStorage.removeItem('schemora_assessment_state');
+                    window.location.reload();
+                  }
+                }}
+              >
+                {t('settings.clearProgress')}
               </button>
             </div>
-          </div>
+          </section>
 
         </div>
-
+        
         <div className={styles.footer}>
-          SCHEMORA Platform v0.1.0-beta
+          <span>{t('settings.version')}</span>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@ interface SettingsContextProps {
 const SettingsContext = createContext<SettingsContextProps | undefined>(undefined);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeType>('system');
+  const [theme, setThemeState] = useState<ThemeType>('light');
   const [density, setDensityState] = useState<DensityType>('comfortable');
   const [reduceMotion, setReduceMotionState] = useState<boolean>(false);
   const [language, setLanguageState] = useState<string>('English');

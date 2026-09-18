@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "home": "होम",
+    "howItWorks": "यह कैसे काम करता है",
+    "exploreSchemes": "योजनाएँ खोजें",
+    "resources": "संसाधन",
+    "about": "हमारे बारे में",
+    "startAssessment": "मूल्यांकन शुरू करें",
+    "openSettings": "सेटिंग्स खोलें",
+    "menu": "मेनू"
+  },
+  "hero": {
+    "headlineHighlight": "मैच करें। फंड प्राप्त करें। आगे बढ़ें।",
+    "headlineText": "आपका व्यवसाय।",
+    "subheadline": "सूक्ष्म-उद्यमियों को राज्य और केंद्र सरकार की योजनाओं से तुरंत जोड़ने वाला बुद्धिमान इंजन।",
+    "ctaStart": "अपना मूल्यांकन शुरू करें",
+    "ctaExplore": "योजनाएँ खोजें",
+    "engineStats": {
+      "schemes": "सक्रिय योजनाएँ",
+      "successRate": "मैच दर",
+      "banks": "नोडल बैंक"
+    }
+  },
+  "settings": {
+    "title": "प्राथमिकताएँ",
+    "close": "सेटिंग्स बंद करें",
+    "appearance": "रूप-रंग",
+    "theme": "थीम",
+    "themeDesc": "अपनी दृश्य शैली चुनें",
+    "themeOptions": {
+      "light": "लाइट",
+      "dark": "डार्क",
+      "system": "सिस्टम"
+    },
+    "density": "सूचना घनत्व",
+    "densityDesc": "स्पेसिंग स्केल समायोजित करें",
+    "densityOptions": {
+      "comfortable": "आरामदायक",
+      "compact": "कॉम्पैक्ट"
+    },
+    "accessibility": "पहुंच और भाषा",
+    "language": "पसंदीदा भाषा",
+    "languageDesc": "सहायक और सामग्री स्थानीयकरण",
+    "reduceMotion": "एनिमेशन कम करें",
+    "reduceMotionDesc": "गैर-जरूरी एनिमेशन अक्षम करें",
+    "session": "सत्र",
+    "clearProgress": "मूल्यांकन प्रगति हटाएं",
+    "clearProgressConfirm": "क्या आप वाकई अपनी मूल्यांकन प्रगति को हटाना चाहते हैं? इसे पूर्ववत नहीं किया जा सकता।",
+    "version": "SCHEMORA प्लेटफ़ॉर्म v0.1.0-beta"
+  },
+  "map": {
+    "searchPlaceholder": "अपना राज्य खोजें...",
+    "zoomIn": "ज़ूम इन",
+    "zoomOut": "ज़ूम आउट",
+    "resetView": "दृश्य रीसेट करें",
+    "eligibleSchemes": "पात्र योजनाएँ",
+    "channelPartners": "चैनल पार्टनर्स",
+    "topSchemes": "शीर्ष उपलब्ध योजनाएँ",
+    "viewAllIn": "सभी देखें:",
+    "noNodeData": "इस राज्य के लिए अभी कोई मजबूत नोडल डेटा मैप नहीं किया गया है। कवरेज सक्रिय रूप से बढ़ रहा है।",
+    "activeHub": "सक्रिय हब",
+    "coverageStatus": "कवरेज स्थिति",
+    "noNodeDataLegend": "कोई नोड डेटा नहीं",
+    "active": "सक्रिय"
+  }
+}
