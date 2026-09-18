@@ -33,7 +33,7 @@ export function SettingsPanel() {
   if (!isSettingsOpen) return null;
 
   return (
-    <div className={styles.overlay} onClick={() => setIsSettingsOpen(false)}>
+    <div className={`${styles.overlay} ${isSettingsOpen ? styles.open : ''}`} onClick={() => setIsSettingsOpen(false)}>
       <div 
         className={`${styles.panel} ${isSettingsOpen ? styles.panelOpen : ''}`} 
         onClick={(e) => e.stopPropagation()}
