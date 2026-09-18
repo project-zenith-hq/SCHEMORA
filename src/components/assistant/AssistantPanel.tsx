@@ -18,16 +18,6 @@ const SUGGESTED_QUESTIONS = [
   "How do I apply for a scheme?"
 ];
 
-const PREDEFINED_ANSWERS: Record<string, string> = {
-  "How does scheme matching work?": "SCHEMORA AI evaluates your profile data against our rule engine. We extract eligibility criteria from official scheme documents and algorithmically score your alignment. This provides an explainable match rather than a black-box guess.",
-  "What do the match statuses mean?": "• Matched: Your profile passes all known rules.\n• Not Matched: You explicitly fail one or more hard requirements.\n• Needs More Info: We lack the data points needed to verify specific edge-case criteria.",
-  "Relevance score vs Approval probability?": "The Relevance Score reflects how perfectly your profile aligns with the scheme's intended audience. It is NOT an approval probability. Official approval is solely determined by the lending bank and nodal agency.",
-  "How accurate is the EMI calculator?": "The EMI calculator provides a structural estimate based on standard amortization formulas. Official interest rates, moratorium periods, and final terms will be set by your lending bank.",
-  "How do I apply for a scheme?": "Once you find a matched scheme, use the Document Checklist to prepare your file. Then, use the Channel Partner locator on the results page to find certified agents or nodal banks near you."
-};
-
-const DEFAULT_ANSWER = "I'm the SCHEMORA App-Literacy Assistant. For specific scheme eligibility, please use the Assessment Flow. Can I help you understand how the platform works?";
-
 export const AssistantPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -52,7 +42,7 @@ export const AssistantPanel = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
-  const handleSend = (text: string) => {
+  const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
     const userMsg: Message = { id: Date.now().toString(), sender: 'user', text };
@@ -60,13 +50,31 @@ export const AssistantPanel = () => {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate network/thinking delay
-    setTimeout(() => {
-      const answer = PREDEFINED_ANSWERS[text] || DEFAULT_ANSWER;
-      const aiMsg: Message = { id: (Date.now() + 1).toString(), sender: 'ai', text: answer };
+    try {
+      const res = await fetch('/api/assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to fetch response');
+      }
+
+      const aiMsg: Message = { id: (Date.now() + 1).toString(), sender: 'ai', text: data.response };
       setMessages(prev => [...prev, aiMsg]);
+    } catch (error: any) {
+      const errorMsg: Message = { 
+        id: (Date.now() + 1).toString(), 
+        sender: 'ai', 
+        text: error.message || "I'm currently unavailable. Please try again later." 
+      };
+      setMessages(prev => [...prev, errorMsg]);
+    } finally {
       setIsTyping(false);
-    }, 800 + Math.random() * 400);
+    }
   };
 
   const handleQuickQuestion = (q: string) => {
