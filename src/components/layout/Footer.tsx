@@ -1,8 +1,12 @@
+"use client";
+
 import React from 'react';
 import Link from 'next/link';
+import { useTranslation } from '@/context/TranslationContext';
 import styles from './Footer.module.css';
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -10,43 +14,42 @@ export function Footer() {
           <div className={styles.brand}>
             <div className={styles.brandName}>SCHEMORA AI</div>
             <p className={styles.brandDesc}>
-              AI-driven scheme discovery and guidance for entrepreneurs. 
-              Built for trust, precision, and accessibility.
+              {t('footer.brandDesc')}
             </p>
           </div>
           
           <div className={styles.links}>
             <div className={styles.linkGroup}>
-              <div className={styles.linkGroupTitle}>Product</div>
-              <Link href="/assessment" className={styles.link}>Start Assessment</Link>
-              <Link href="/explore" className={styles.link}>Explore Schemes</Link>
-              <Link href="/#how-it-works" className={styles.link}>How It Works</Link>
+              <div className={styles.linkGroupTitle}>{t('footer.product')}</div>
+              <Link href="/assessment" className={styles.link}>{t('nav.startAssessment')}</Link>
+              <Link href="/explore" className={styles.link}>{t('nav.exploreSchemes')}</Link>
+              <Link href="/#how-it-works" className={styles.link}>{t('nav.howItWorks')}</Link>
             </div>
             
             <div className={styles.linkGroup}>
-              <div className={styles.linkGroupTitle}>Company</div>
-              <Link href="/about" className={styles.link}>About</Link>
-              <Link href="/resources" className={styles.link}>Resources</Link>
+              <div className={styles.linkGroupTitle}>{t('footer.company')}</div>
+              <Link href="/about" className={styles.link}>{t('nav.about')}</Link>
+              <Link href="/resources" className={styles.link}>{t('nav.resources')}</Link>
             </div>
 
             <div className={styles.linkGroup}>
-              <div className={styles.linkGroupTitle}>Legal</div>
-              <Link href="/privacy" className={styles.link}>Privacy</Link>
-              <Link href="/terms" className={styles.link}>Terms</Link>
+              <div className={styles.linkGroupTitle}>{t('footer.legal')}</div>
+              <Link href="/privacy" className={styles.link}>{t('footer.privacy')}</Link>
+              <Link href="/terms" className={styles.link}>{t('footer.terms')}</Link>
             </div>
           </div>
         </div>
         
         <div className={styles.bottomSection}>
           <div className={styles.accuracyNote}>
-            <strong>Sources & Accuracy:</strong> All scheme information is aggregated from official government publications. Rules and eligibility criteria are deterministically mapped directly from the latest gazette notifications. Last updated: September 2026.
+            <strong>{t('footer.sourcesTitle')}</strong> {t('footer.sourcesDesc')} Last updated: September 2026.
           </div>
           <div className={styles.bottomBar}>
-            <div>&copy; {new Date().getFullYear()} SCHEMORA AI. All rights reserved.</div>
+            <div>&copy; {new Date().getFullYear()} {t('footer.rights')}</div>
             <div className={styles.team}>
-              <span><strong>ASTRA-X</strong> — Ideas Beyond Limits</span>
+              <span><strong>{t('footer.team').split('—')[0]}</strong>—{t('footer.team').split('—')[1]}</span>
               <span>|</span>
-              <span>Smart India Hackathon 2026 (SIH26092)</span>
+              <span>{t('footer.event')}</span>
             </div>
           </div>
         </div>

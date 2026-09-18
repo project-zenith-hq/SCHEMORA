@@ -3,20 +3,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './AssistantPanel.module.css';
 import { RobotIcon } from './RobotIcon';
+import { useTranslation } from '@/context/TranslationContext';
 
 type Message = {
   id: string;
   sender: 'ai' | 'user';
   text: string;
 };
-
-const SUGGESTED_QUESTIONS = [
-  "How does scheme matching work?",
-  "What do the match statuses mean?",
-  "Relevance score vs Approval probability?",
-  "How accurate is the EMI calculator?",
-  "How do I apply for a scheme?"
-];
 
 export const AssistantPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +18,14 @@ export const AssistantPanel = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  
+  const { language, t } = useTranslation();
+
+  const SUGGESTED_QUESTIONS = [
+    t('map.eligibleSchemes'),
+    "How does scheme matching work?",
+    "What do the match statuses mean?"
+  ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +55,7 @@ export const AssistantPanel = () => {
       const res = await fetch('/api/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({ message: text, language })
       });
 
       const data = await res.json();

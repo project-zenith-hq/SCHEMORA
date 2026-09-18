@@ -65,11 +65,15 @@ export async function POST(req: Request) {
 
     // 2. Input Validation
     const body = await req.json();
-    const { message } = body;
+    const { message, language } = body;
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Invalid message format.' }, { status: 400 });
     }
+
+    const effectivePrompt = language 
+      ? `${SYSTEM_PROMPT}\n\nThe user's preferred UI language is ${language}. Please prioritize responding in this language unless the user specifically asks otherwise.`
+      : SYSTEM_PROMPT;
 
     if (message.length > MAX_MESSAGE_LENGTH) {
       return NextResponse.json(
@@ -97,7 +101,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           model: model,
           messages: [
-            { role: 'system', content: SYSTEM_PROMPT },
+            { role: 'system', content: effectivePrompt },
             { role: 'user', content: message }
           ]
         })
