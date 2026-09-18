@@ -2,13 +2,13 @@
   background-color: var(--bg-panel);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
   overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .hoverable:hover {
-  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
 }
 
