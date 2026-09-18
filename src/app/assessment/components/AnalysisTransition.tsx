@@ -26,8 +26,6 @@ export function AnalysisTransition() {
     const timer = setInterval(() => {
       setCurrentStep(prev => {
         if (prev >= ANALYSIS_STEPS.length - 1) {
-          clearInterval(timer);
-          router.push('/results');
           return prev;
         }
         return prev + 1;
@@ -35,7 +33,13 @@ export function AnalysisTransition() {
     }, 600); // Transitions fairly quickly, not faking a 20s load
 
     return () => clearInterval(timer);
-  }, [profile, router, setMatchResults]);
+  }, [profile, setMatchResults]);
+
+  useEffect(() => {
+    if (currentStep >= ANALYSIS_STEPS.length - 1) {
+      router.push('/results');
+    }
+  }, [currentStep, router]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] text-center w-full max-w-lg mx-auto">
