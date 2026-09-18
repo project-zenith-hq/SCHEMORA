@@ -1,0 +1,227 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+}
+
+.header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.content {
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.4;
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.input, .select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus, .select:focus {
+  border-color: var(--accent);
+}
+
+.evaluateBtn {
+  background-color: var(--accent);
+  color: var(--text-primary);
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 16px;
+  transition: opacity 0.2s;
+}
+
+.evaluateBtn:hover {
+  opacity: 0.9;
+}
+
+/* Result Styles */
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.successCard {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10b981;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: #10b981;
+}
+
+.errorCard {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  color: #ef4444;
+}
+
+.resultIcon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.successCard h3, .errorCard h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.successCard p, .errorCard p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.rulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ruleItem {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.ruleFailed {
+  background-color: rgba(239, 68, 68, 0.05);
+  border-left: 3px solid #ef4444;
+  color: var(--text-primary);
+}
+
+.rulePending {
+  background-color: rgba(245, 184, 0, 0.05);
+  border-left: 3px solid var(--accent);
+  color: var(--text-primary);
+}
+
+.ruleMatched {
+  background-color: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid #10b981;
+  color: var(--text-primary);
+}
+
+.actionRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.secondaryBtn {
+  flex: 1;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primaryLink {
+  flex: 1;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s;
+}
+
+.primaryLink:hover {
+  opacity: 0.9;
+}
