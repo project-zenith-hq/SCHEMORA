@@ -439,6 +439,53 @@ export const SCHEMES_DATABASE: Scheme[] = [
     ],
     officialPortalUrl: 'https://www.agriclinics.net/',
     isDemoData: true
+  },
+  {
+    id: 'maha-svayal-2024',
+    name: 'Maharashtra Svayambhu Yojana (Mock)',
+    officialCode: 'MH/MSME-SVY-01',
+    ministry: 'Department of Industries, Govt of Maharashtra',
+    tagline: 'State-level capital support for rural MSME growth',
+    description: 'A mock state-specific scheme for demonstration purposes. This scheme provides capital support to MSMEs located in Maharashtra to boost rural industrialization.',
+    whoItIsFor: 'Entrepreneurs establishing manufacturing units in rural Maharashtra.',
+    categoryTag: 'MSME',
+    minFundingAmount: 200000,
+    maxFundingAmount: 1500000,
+    interestRateMin: 6.0,
+    interestRateMax: 8.5,
+    moratoriumMonths: 6,
+    repaymentTenureYears: 5,
+    collateralRequired: false,
+    collateralDetails: 'Covered under State Guarantee Fund.',
+    rules: {
+      minAge: 18,
+      allowedBusinessTypes: ['new_business'],
+      allowedIndustries: ['manufacturing', 'food_processing'],
+      maxLoanAmount: 1500000
+    },
+    subsidyRules: {
+      generalUrbanPercent: 10,
+      generalRuralPercent: 20,
+      specialUrbanPercent: 15,
+      specialRuralPercent: 25,
+      ownContributionGeneral: 10,
+      ownContributionSpecial: 5
+    },
+    requiredDocuments: [
+      'Domicile Certificate of Maharashtra',
+      'Aadhaar Card',
+      'Project Report'
+    ],
+    applicationChannel: 'Maha-Industries Portal',
+    applicationSteps: [
+      'Submit online application on Maha-Industries portal',
+      'District Committee review',
+      'Bank sanction'
+    ],
+    channelPartners: [],
+    officialPortalUrl: 'https://di.maharashtra.gov.in/',
+    isDemoData: true,
+    state: 'Maharashtra'
   }
 ];
 

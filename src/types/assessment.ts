@@ -143,6 +143,7 @@ export interface Scheme {
   channelPartners: ChannelPartner[];
   officialPortalUrl: string;
   isDemoData: boolean;
+  state?: string; // Optional field for state-specific schemes
 }
 
 export interface EligibilityEvaluation {
