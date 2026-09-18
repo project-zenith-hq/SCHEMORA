@@ -38,11 +38,16 @@ export function Footer() {
         </div>
         
         <div className={styles.bottomSection}>
-          <div>&copy; {new Date().getFullYear()} SCHEMORA AI. All rights reserved.</div>
-          <div className={styles.team}>
-            <span><strong>ASTRA-X</strong> — Ideas Beyond Limits</span>
-            <span>|</span>
-            <span>Smart India Hackathon 2026 (SIH26092)</span>
+          <div className={styles.accuracyNote}>
+            <strong>Sources & Accuracy:</strong> All scheme information is aggregated from official government publications. Rules and eligibility criteria are deterministically mapped directly from the latest gazette notifications. Last updated: September 2026.
+          </div>
+          <div className={styles.bottomBar}>
+            <div>&copy; {new Date().getFullYear()} SCHEMORA AI. All rights reserved.</div>
+            <div className={styles.team}>
+              <span><strong>ASTRA-X</strong> — Ideas Beyond Limits</span>
+              <span>|</span>
+              <span>Smart India Hackathon 2026 (SIH26092)</span>
+            </div>
           </div>
         </div>
       </div>

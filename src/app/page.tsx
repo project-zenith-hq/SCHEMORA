@@ -2,8 +2,15 @@
 
 import React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/Button";
+import HeroEngineDemo from "@/components/Home/HeroEngineDemo";
 import styles from "./page.module.css";
+
+const IndiaMap = dynamic(() => import("@/components/Map/IndiaMap"), { 
+  ssr: false, 
+  loading: () => <div className="animate-pulse bg-gray-100 rounded-lg w-full h-[400px] border border-gray-200"></div> 
+});
 
 export default function Home() {
   return (
@@ -29,47 +36,24 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* UI PREVIEW */}
+        {/* CREDIBILITY STRIP */}
+        <div className={styles.credibilityStrip}>
+          <div className={styles.credItem}>
+            <strong>6</strong> Active Schemes Analyzed
+          </div>
+          <div className={styles.credDivider} />
+          <div className={styles.credItem}>
+            SIH26092: Ministry of Social Justice & Empowerment
+          </div>
+          <div className={styles.credDivider} />
+          <div className={styles.credItem}>
+            Manufacturing, Service & Agriculture
+          </div>
+        </div>
+
+        {/* UI PREVIEW / ENGINE DEMO */}
         <div className={styles.uiPreview}>
-          <div className={styles.previewHeader}>
-            <span className={styles.previewHeaderTitle}>SCHEMORA AI</span>
-            <div className={styles.previewDots}>
-              <div className={styles.previewDot} />
-            </div>
-          </div>
-          <div className={styles.previewBody}>
-            <div className={styles.previewSidebar}>
-              <div className={`${styles.previewStep} ${styles.active}`}>
-                <span className={styles.stepDot}></span> Your Profile
-              </div>
-              <div className={styles.previewStep}>Business Type</div>
-              <div className={styles.previewStep}>Funding</div>
-              <div className={styles.previewStep}>Location</div>
-            </div>
-            <div className={styles.previewMain}>
-              <div className={styles.previewMatchHeader}>
-                <div className={styles.previewMatchBadge}>AI MATCH</div>
-                <div className={styles.previewMatchTitle}>Recommended schemes</div>
-              </div>
-              <div className={styles.previewCard}>
-                <div className={styles.previewCardTitle}>Prime Minister&apos;s Employment Generation Programme</div>
-                <div className={styles.previewCardTags}>
-                  <span className={styles.previewTag}>Manufacturing</span>
-                  <span className={styles.previewTag}>Service</span>
-                </div>
-                <div className={styles.previewCardRow}>
-                  <div className={styles.previewCardCol}>
-                    <div className={styles.previewCardLabel}>Max Support</div>
-                    <div className={styles.previewCardValue}>₹50 Lakhs</div>
-                  </div>
-                  <div className={styles.previewCardCol}>
-                    <div className={styles.previewCardLabel}>Subsidy</div>
-                    <div className={styles.previewCardValue}>15% - 35%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <HeroEngineDemo />
         </div>
       </section>
 
@@ -96,23 +80,23 @@ export default function Home() {
           </div>
           <div>
             <div className={styles.problemNumber}>02</div>
-            <h3 className={styles.problemItemTitle}>Eligibility</h3>
+            <h3 className={styles.problemItemTitle}>Statutory Eligibility</h3>
             <p className={styles.problemItemDesc}>
-              Complex statutory requirements, exclusions, and demographic criteria are difficult to understand and verify.
+              Complex statutory requirements, rigid exclusions, and layered demographic criteria (SC/ST, Area, Greenfield) are difficult to understand and verify.
             </p>
           </div>
           <div>
             <div className={styles.problemNumber}>03</div>
-            <h3 className={styles.problemItemTitle}>Application</h3>
+            <h3 className={styles.problemItemTitle}>Application Friction</h3>
             <p className={styles.problemItemDesc}>
-              Required documents, financial projections, and application pathways vary widely and create friction.
+              Required documents, financial projections (DPRs), and application pathways vary widely and create significant drop-off friction.
             </p>
           </div>
           <div>
             <div className={styles.problemNumber}>04</div>
-            <h3 className={styles.problemItemTitle}>Access</h3>
+            <h3 className={styles.problemItemTitle}>Access & Routing</h3>
             <p className={styles.problemItemDesc}>
-              Applicants often do not know where to begin, which portal to use, or which channel partner to approach.
+              Applicants often do not know where to begin, which portal to use, or which nodal agency/channel partner to approach for sanction.
             </p>
           </div>
         </div>
@@ -126,24 +110,40 @@ export default function Home() {
           <div className={styles.timelineStep}>
             <div className={styles.timelineCircle}>01</div>
             <div className={styles.timelineTitle}>TELL US ABOUT YOU</div>
+            <div className={styles.timelineDesc}>Input your business profile, demographics, and funding needs.</div>
           </div>
           <div className={styles.timelineStep}>
             <div className={styles.timelineCircle}>02</div>
-            <div className={styles.timelineTitle}>UNDERSTAND YOUR NEED</div>
+            <div className={styles.timelineTitle}>RULE ENGINE RUNS</div>
+            <div className={styles.timelineDesc}>We check statutory eligibility without LLM hallucination.</div>
           </div>
           <div className={styles.timelineStep}>
             <div className={styles.timelineCircle}>03</div>
-            <div className={styles.timelineTitle}>CHECK ELIGIBILITY</div>
+            <div className={styles.timelineTitle}>MATCH SCHEMES</div>
+            <div className={styles.timelineDesc}>Relevant schemes are ranked based on alignment and subsidy value.</div>
           </div>
           <div className={styles.timelineStep}>
             <div className={styles.timelineCircle}>04</div>
-            <div className={styles.timelineTitle}>MATCH RELEVANT SCHEMES</div>
+            <div className={styles.timelineTitle}>GET GUIDED</div>
+            <div className={styles.timelineDesc}>See exactly which documents you need and where to apply.</div>
           </div>
           <div className={styles.timelineStep}>
             <div className={styles.timelineCircle}>05</div>
-            <div className={styles.timelineTitle}>GUIDE YOUR NEXT STEP</div>
+            <div className={styles.timelineTitle}>CONNECT</div>
+            <div className={styles.timelineDesc}>Find nearby channel partners and nodal banks to submit your file.</div>
           </div>
         </div>
+      </section>
+
+      {/* COVERAGE MAP SECTION */}
+      <section className={styles.section} id="coverage">
+        <h2 className={styles.sectionTitle} style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          National Network Coverage
+        </h2>
+        <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem' }}>
+          SCHEMORA aggregates intelligence across multiple central schemes and maps them to regional active channel partners.
+        </p>
+        <IndiaMap />
       </section>
 
     </div>

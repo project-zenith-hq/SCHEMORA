@@ -12,9 +12,15 @@ import { FundingStep } from './components/FundingStep';
 import { LocationStep } from './components/LocationStep';
 import { ReviewStep } from './components/ReviewStep';
 import { AnalysisTransition } from './components/AnalysisTransition';
+import { DocumentScanner } from './components/DocumentScanner';
+import { AutoFillReview } from './components/AutoFillReview';
+import { ExtractedData } from '@/utils/idExtractor';
 
 export default function AssessmentPage() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0); // 0 = Entry Method Selection
+  const [extractedData, setExtractedData] = useState<ExtractedData | null>(null);
+  const [scannerMode, setScannerMode] = useState<'idle' | 'scanning' | 'review'>('idle');
+  
   const { profile, setErrors } = useAssessment();
 
   const validateStep = (currentStep: number): boolean => {
@@ -64,6 +70,63 @@ export default function AssessmentPage() {
 
   const renderStepContent = () => {
     switch (step) {
+      case 0:
+        if (scannerMode === 'scanning') {
+          return (
+            <div style={{ maxWidth: '600px', margin: '0 auto', padding: '0 1rem' }}>
+              <DocumentScanner
+                onDataExtracted={(data) => {
+                  setExtractedData(data);
+                  setScannerMode('review');
+                }}
+                onCancel={() => setScannerMode('idle')}
+              />
+            </div>
+          );
+        }
+        
+        if (scannerMode === 'review' && extractedData) {
+          return (
+            <div style={{ maxWidth: '600px', margin: '0 auto', padding: '0 1rem' }}>
+              <AutoFillReview
+                extractedData={extractedData}
+                onConfirm={() => {
+                  setScannerMode('idle');
+                  setStep(1); // Proceed to profile step
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onCancel={() => setScannerMode('idle')}
+              />
+            </div>
+          );
+        }
+
+        return (
+          <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 1rem', textAlign: 'center' }}>
+            <h1 style={{ color: 'var(--text-primary)', marginBottom: '1rem', fontSize: '2.5rem' }}>Start Your Assessment</h1>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>
+              Choose how you'd like to provide your profile details.
+            </p>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+              <div style={{ background: 'var(--bg-primary)', border: '1px solid var(--accent-amber)', borderRadius: '12px', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', boxShadow: '0 4px 20px rgba(234,179,8,0.1)' }}>
+                <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-primary)', fontSize: '1.5rem' }}>Smart Auto-Fill</h3>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Scan your ID (Aadhaar QR or photo) to securely auto-populate basic details. <strong>No sensitive numbers are stored.</strong></p>
+                <Button variant="primary" style={{ width: '100%' }} onClick={() => setScannerMode('scanning')}>
+                  Scan your ID to auto-fill
+                </Button>
+              </div>
+
+              <div style={{ background: 'var(--bg-primary)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-primary)', fontSize: '1.5rem' }}>Manual Entry</h3>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Type in all your profile details manually step by step.</p>
+                <Button variant="ghost" style={{ width: '100%' }} onClick={() => { setStep(1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                  Enter manually
+                </Button>
+              </div>
+            </div>
+          </div>
+        );
       case 1:
         return (
           <StepLayout

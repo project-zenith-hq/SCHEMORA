@@ -1,0 +1,248 @@
+.demoContainer {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+}
+
+.demoHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-secondary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.demoDots {
+  display: flex;
+  gap: 6px;
+}
+
+.demoDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--border-medium);
+}
+
+.demoDot.active {
+  background-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.demoBody {
+  display: flex;
+  height: 320px;
+}
+
+.demoSidebar {
+  width: 180px;
+  border-right: 1px solid var(--border-subtle);
+  background-color: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+}
+
+.demoStep {
+  padding: 16px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.demoStep.active {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border-right: 2px solid var(--accent);
+  font-weight: 600;
+}
+
+.stepIcon {
+  width: 14px;
+  height: 14px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.stepIcon.completed {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.demoMain {
+  flex: 1;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animations */
+.stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.stage.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.stageTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.dataBlock {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.dataRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.dataRow:last-child {
+  margin-bottom: 0;
+}
+
+.dataLabel {
+  color: var(--text-dim);
+}
+
+.dataValue {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.ruleCheck {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.ruleIcon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.ruleIcon.pending {
+  border: 1px dashed var(--text-dim);
+  color: transparent;
+  animation: spin 2s linear infinite;
+}
+
+.ruleIcon.pass {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.ruleText {
+  color: var(--text-primary);
+}
+
+.matchCard {
+  border: 1px solid var(--accent);
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(224, 168, 0, 0.1);
+}
+
+.matchBadge {
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background-color: var(--accent);
+  color: #000;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.matchTitle {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.matchTags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.matchTag {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+}
+
+.matchData {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 12px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
