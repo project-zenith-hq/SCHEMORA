@@ -7,7 +7,29 @@ import {
   computeAIMatch
 } from './engine';
 import { UserProfile, Scheme } from '../types/assessment';
-import { SCHEMES_DATABASE, DEMO_USER_PRESET } from '../data/schemes';
+import { SCHEMES_DATABASE } from '../data/schemes';
+
+export const DEMO_USER_PRESET: UserProfile = {
+  fullName: "Rahul Kumar",
+  age: 28,
+  gender: "male",
+  category: "sc",
+  annualIncome: 300000,
+  education: "graduate",
+  state: "Maharashtra",
+  district: "Pune",
+  city: "Pune",
+  areaType: "rural",
+  industry: "manufacturing",
+  businessType: "new_business",
+  businessStage: "idea_concept",
+  projectDescription: "New manufacturing unit",
+  projectCost: 1500000,
+  personalContribution: 100000,
+  requiredFunding: 1400000,
+  fundingPurpose: "machinery_equipment",
+  loanType: "term_loan",
+};
 
 describe('engine.ts', () => {
   describe('formatINR', () => {

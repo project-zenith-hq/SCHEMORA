@@ -41,10 +41,10 @@ export default function IndiaMap() {
 
   const { t } = useTranslation();
 
-  const centralSchemes = useMemo(() => SCHEMES_DATABASE.filter(s => !s.state), []);
+  const centralSchemes = useMemo(() => SCHEMES_DATABASE.filter(s => !s.states || s.states.includes('all')), []);
   
   const getStateData = (stateName: string) => {
-    const stateSchemes = SCHEMES_DATABASE.filter(s => s.state === stateName);
+    const stateSchemes = SCHEMES_DATABASE.filter(s => s.states && s.states.includes(stateName) && !s.states.includes('all'));
     const total = centralSchemes.length + stateSchemes.length;
     return {
       total,

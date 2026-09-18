@@ -289,6 +289,7 @@ export function computeAIMatch(
 
   // 4. Funding Band Fit (+5)
   if (
+    scheme.minFundingAmount && scheme.maxFundingAmount &&
     profile.requiredFunding >= scheme.minFundingAmount &&
     profile.requiredFunding <= scheme.maxFundingAmount
   ) {
