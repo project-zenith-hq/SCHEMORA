@@ -6,6 +6,10 @@ export interface ExtractedData {
   age?: number;
   gender?: 'female' | 'male' | 'transgender' | 'prefer_not_to_say';
   state?: string;
+  address?: string;
+  documentNumber?: string;
+  documentType?: string;
+  message?: string;
 }
 
 // Calculate age from YYYY or DD/MM/YYYY
@@ -27,32 +31,43 @@ export const extractFromText = (text: string): ExtractedData => {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
   const fullText = text.replace(/\s+/g, ' ');
 
-  // 1. Extract Gender
-  if (/female/i.test(fullText)) {
+  // 1. Detect Document Type & Number
+  const aadhaarMatch = fullText.match(/\b\d{4}\s?\d{4}\s?\d{4}\b/);
+  if (aadhaarMatch) {
+    data.documentType = 'Aadhaar';
+    const numStr = aadhaarMatch[0].replace(/\s/g, '');
+    data.documentNumber = `XXXX XXXX ${numStr.slice(-4)}`;
+  } else {
+    const panMatch = fullText.match(/\b[A-Z]{5}\d{4}[A-Z]\b/);
+    if (panMatch) {
+      data.documentType = 'PAN';
+      const numStr = panMatch[0];
+      data.documentNumber = `XXXXX${numStr.slice(5, 9)}X`;
+    }
+  }
+
+  // 2. Extract Gender
+  if (/\bfemale\b/i.test(fullText)) {
     data.gender = 'female';
-  } else if (/male/i.test(fullText)) {
+  } else if (/\bmale\b/i.test(fullText)) {
     data.gender = 'male';
-  } else if (/transgender/i.test(fullText)) {
+  } else if (/\btransgender\b/i.test(fullText)) {
     data.gender = 'transgender';
   }
 
-  // 2. Extract Date of Birth / Year of Birth
-  // Look for DD/MM/YYYY or YOB
+  // 3. Extract Date of Birth / Year of Birth
   const dobMatch = text.match(/(?:DOB|Date of Birth|Year of Birth|YOB)[\s:]*([0-9/]+)/i);
   if (dobMatch && dobMatch[1]) {
     data.age = calculateAge(dobMatch[1]);
   } else {
-    // Just look for a date pattern if labels are missing
     const datePattern = text.match(/\b\d{2}\/\d{2}\/(19|20)\d{2}\b/);
     if (datePattern) {
       data.age = calculateAge(datePattern[0]);
     }
   }
 
-  // 3. Extract Name
-  // This is tricky via simple OCR without layout analysis.
-  // For this prototype, we'll try a very naive approach: look for lines that look like a full name
-  const isLabel = (str: string) => /government|india|father|dob|year|birth|gender|male|female/i.test(str);
+  // 4. Extract Name
+  const isLabel = (str: string) => /government|india|father|dob|year|birth|gender|male|female|address|signature|pan|permanent|account|card/i.test(str);
   const nameLine = lines.find(line => {
     return line.length > 3 && line.length < 30 && !/\d/.test(line) && !isLabel(line) && /^[A-Z][a-zA-Z\s]+$/.test(line);
   });
@@ -63,20 +78,69 @@ export const extractFromText = (text: string): ExtractedData => {
       .join(' ');
   }
 
+  // 5. Extract Address (very naive heuristic for typical ID layout)
+  const addressIndex = lines.findIndex(l => /address/i.test(l));
+  if (addressIndex !== -1 && addressIndex + 1 < lines.length) {
+    // Take the next few lines as address, stopping if we hit another label or something looking like a different section
+    let addressLines = [];
+    for (let i = addressIndex; i < lines.length && i < addressIndex + 4; i++) {
+      const line = lines[i].replace(/address[\s:]*/i, '').trim();
+      if (line.length > 0) addressLines.push(line);
+    }
+    if (addressLines.length > 0) {
+      data.address = addressLines.join(', ');
+    }
+  } else {
+    // Look for Care of / S/O / D/O / W/O pattern
+    const careOfIndex = lines.findIndex(l => /(C\/O|S\/O|D\/O|W\/O)/i.test(l));
+    if (careOfIndex !== -1) {
+      let addressLines = [];
+      for (let i = careOfIndex; i < lines.length && i < careOfIndex + 4; i++) {
+        addressLines.push(lines[i]);
+      }
+      data.address = addressLines.join(', ');
+    }
+  }
+
   return data;
 };
 
 export const extractFromQR = (qrData: string): ExtractedData => {
   const data: ExtractedData = {};
   
+  if (qrData.startsWith('http://') || qrData.startsWith('https://')) {
+    data.message = `QR contains a URL: ${qrData}. We do not automatically navigate to URLs for security reasons.`;
+    return data;
+  }
+
   try {
-    // Attempt XML parse
+    // Try to parse JSON first
+    if (qrData.startsWith('{')) {
+      const parsed = JSON.parse(qrData);
+      if (parsed.name) data.fullName = parsed.name;
+      if (parsed.dob) data.age = calculateAge(parsed.dob);
+      if (parsed.gender) {
+        const g = parsed.gender.toLowerCase();
+        if (g.startsWith('f')) data.gender = 'female';
+        else if (g.startsWith('m')) data.gender = 'male';
+      }
+      return data;
+    }
+
+    // Attempt XML parse (typical Aadhaar format)
     const nameMatch = qrData.match(/name="([^"]+)"/i);
     const yobMatch = qrData.match(/yob="([^"]+)"/i) || qrData.match(/dob="([^"]+)"/i);
     const genderMatch = qrData.match(/gender="([^"]+)"/i);
     const stateMatch = qrData.match(/state="([^"]+)"/i);
+    const coMatch = qrData.match(/co="([^"]+)"/i);
+    const locMatch = qrData.match(/loc="([^"]+)"/i);
+    const vtcMatch = qrData.match(/vtc="([^"]+)"/i);
+    const pcMatch = qrData.match(/pc="([^"]+)"/i);
 
-    if (nameMatch) data.fullName = nameMatch[1];
+    if (nameMatch) {
+      data.fullName = nameMatch[1];
+      data.documentType = 'Aadhaar'; // If it has this XML schema, it's likely Aadhaar
+    }
     if (yobMatch) data.age = calculateAge(yobMatch[1]);
     if (genderMatch) {
       const g = genderMatch[1].toLowerCase();
@@ -85,8 +149,23 @@ export const extractFromQR = (qrData: string): ExtractedData => {
       else if (g.startsWith('t')) data.gender = 'transgender';
     }
     if (stateMatch) data.state = stateMatch[1];
+    
+    // Construct address if available
+    let addressParts = [];
+    if (coMatch) addressParts.push(coMatch[1]);
+    if (locMatch) addressParts.push(locMatch[1]);
+    if (vtcMatch) addressParts.push(vtcMatch[1]);
+    if (stateMatch) addressParts.push(stateMatch[1]);
+    if (pcMatch) addressParts.push(pcMatch[1]);
+    if (addressParts.length > 0) data.address = addressParts.join(', ');
+
   } catch (e) {
     console.error("Failed to parse QR data", e);
+  }
+
+  // If we couldn't parse it structurally, treat it as text
+  if (Object.keys(data).length === 0) {
+    return extractFromText(qrData);
   }
 
   return data;
@@ -128,8 +207,6 @@ export const processImage = async (imageSource: HTMLImageElement | HTMLCanvasEle
   const { data: { text } } = await worker.recognize(canvas);
   await worker.terminate();
 
-  const sanitizedText = text.replace(/\b\d{4}\s?\d{4}\s?\d{4}\b/g, 'XXXX XXXX XXXX');
-
   if (onProgress) onProgress("Extracting fields...");
-  return extractFromText(sanitizedText);
+  return extractFromText(text);
 };
