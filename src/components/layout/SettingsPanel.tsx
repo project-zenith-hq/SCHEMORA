@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useSettings } from '@/context/SettingsContext';
 import { useTranslation } from '@/context/TranslationContext';
+import { LanguageSelector } from './LanguageSelector';
 import styles from './SettingsPanel.module.css';
 
 export function SettingsPanel() {
@@ -69,19 +70,19 @@ export function SettingsPanel() {
               </div>
               <div className={styles.segmentedControl}>
                 <button 
-                  className={theme === 'light' ? styles.activeSegment : ''} 
+                  className={`${styles.segmentButton} ${theme === 'light' ? styles.active : ''}`} 
                   onClick={() => setTheme('light')}
                 >
                   {t('settings.themeOptions.light')}
                 </button>
                 <button 
-                  className={theme === 'dark' ? styles.activeSegment : ''} 
+                  className={`${styles.segmentButton} ${theme === 'dark' ? styles.active : ''}`} 
                   onClick={() => setTheme('dark')}
                 >
                   {t('settings.themeOptions.dark')}
                 </button>
                 <button 
-                  className={theme === 'system' ? styles.activeSegment : ''} 
+                  className={`${styles.segmentButton} ${theme === 'system' ? styles.active : ''}`} 
                   onClick={() => setTheme('system')}
                 >
                   {t('settings.themeOptions.system')}
@@ -96,13 +97,13 @@ export function SettingsPanel() {
               </div>
               <div className={styles.segmentedControl}>
                 <button 
-                  className={density === 'comfortable' ? styles.activeSegment : ''} 
+                  className={`${styles.segmentButton} ${density === 'comfortable' ? styles.active : ''}`} 
                   onClick={() => setDensity('comfortable')}
                 >
                   {t('settings.densityOptions.comfortable')}
                 </button>
                 <button 
-                  className={density === 'compact' ? styles.activeSegment : ''} 
+                  className={`${styles.segmentButton} ${density === 'compact' ? styles.active : ''}`} 
                   onClick={() => setDensity('compact')}
                 >
                   {t('settings.densityOptions.compact')}
@@ -123,19 +124,7 @@ export function SettingsPanel() {
                 <span className={styles.desc}>{t('settings.languageDesc')}</span>
               </div>
               <div className={styles.selectWrapper}>
-                <select 
-                  className={styles.selectInput}
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                >
-                  <optgroup label="Verified Translations">
-                    {supportedLocales.filter(l => l.isStatic).map(l => (
-                      <option key={l.code} value={l.code}>
-                        {l.nativeName} ({l.name})
-                      </option>
-                    ))}
-                  </optgroup>
-                </select>
+                <LanguageSelector />
               </div>
             </div>
 
