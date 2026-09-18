@@ -250,9 +250,9 @@ export default function IndiaMap() {
                   {getStateData(activeStateDetails).centralSchemes.map(s => (
                     <div key={s.id} className={styles.schemeCard} onClick={() => setSelectedScheme(s)}>
                       <h5 className={styles.schemeCardTitle}>{s.name}</h5>
-                      <span className={styles.schemeCardMinistry}>{s.ministry}</span>
-                      <p className={styles.schemeCardPurpose}>{s.tagline}</p>
-                      <span className={styles.schemeCardAmount}>Max: ₹{formatAmount(s.maxFundingAmount)}</span>
+                      <span className={styles.schemeCardMinistry}>{s.ministry || s.categoryTags?.[0] || 'Government of India'}</span>
+                      <p className={styles.schemeCardPurpose}>{s.purpose || s.description || 'Details pending verification.'}</p>
+                      {s.maxFundingAmount && <span className={styles.schemeCardAmount}>Max: ₹{formatAmount(s.maxFundingAmount)}</span>}
                     </div>
                   ))}
                 </div>
@@ -265,9 +265,9 @@ export default function IndiaMap() {
                     {getStateData(activeStateDetails).stateSchemes.map(s => (
                       <div key={s.id} className={styles.schemeCard} onClick={() => setSelectedScheme(s)}>
                         <h5 className={styles.schemeCardTitle}>{s.name}</h5>
-                        <span className={styles.schemeCardMinistry}>{s.ministry}</span>
-                        <p className={styles.schemeCardPurpose}>{s.tagline}</p>
-                        <span className={styles.schemeCardAmount}>Max: ₹{formatAmount(s.maxFundingAmount)}</span>
+                        <span className={styles.schemeCardMinistry}>{s.ministry || s.categoryTags?.[0] || 'State Government'}</span>
+                        <p className={styles.schemeCardPurpose}>{s.purpose || s.description || 'Details pending verification.'}</p>
+                        {s.maxFundingAmount && <span className={styles.schemeCardAmount}>Max: ₹{formatAmount(s.maxFundingAmount)}</span>}
                       </div>
                     ))}
                   </div>

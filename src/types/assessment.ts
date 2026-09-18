@@ -93,6 +93,8 @@ export interface SchemeRule {
   maxLoanAmount?: number;
   minLoanAmount?: number;
   requiresGreenfield?: boolean;
+  minIncome?: number;
+  maxIncome?: number;
 }
 
 export interface SchemeSubsidyRule {
@@ -121,29 +123,35 @@ export interface ChannelPartner {
 export interface Scheme {
   id: string;
   name: string;
-  officialCode: string;
-  ministry: string;
-  tagline: string;
+  officialCode?: string;
+  ministry?: string;
+  tagline?: string;
+  purpose?: string;
   description: string;
-  whoItIsFor: string;
-  categoryTag: 'MSME' | 'Microfinance' | 'Women / Marginalized' | 'Artisans' | 'Agriculture';
-  maxFundingAmount: number;
-  minFundingAmount: number;
-  interestRateMin: number;
-  interestRateMax: number;
-  moratoriumMonths: number;
-  repaymentTenureYears: number;
-  collateralRequired: boolean;
-  collateralDetails: string;
+  whoItIsFor?: string;
+  categoryTags?: string[];
+  sectors?: string[];
+  maxFundingAmount?: number;
+  minFundingAmount?: number;
+  interestRateMin?: number;
+  interestRateMax?: number;
+  moratoriumMonths?: number;
+  repaymentTenureYears?: number;
+  collateralRequired?: boolean;
+  collateralDetails?: string;
   rules: SchemeRule;
   subsidyRules?: SchemeSubsidyRule;
-  requiredDocuments: string[];
-  applicationChannel: string;
-  applicationSteps: string[];
-  channelPartners: ChannelPartner[];
-  officialPortalUrl: string;
-  isDemoData: boolean;
-  state?: string; // Optional field for state-specific schemes
+  requiredDocuments?: string[];
+  applicationChannel?: string;
+  applicationSteps?: string[];
+  channelPartners?: ChannelPartner[];
+  officialPortalUrl?: string;
+  isDemoData?: boolean;
+  states?: string[];
+  sourceLastUpdated?: string;
+  dataConfidence?: number;
+  needsVerification?: boolean;
+  verificationNote?: string;
 }
 
 export interface EligibilityEvaluation {
@@ -163,6 +171,7 @@ export interface SchemeMatchResult {
   personalizedExplanation: string;
   keyBenefitHighlight: string;
   recommendedNextStep: string;
+  dataNotVerified?: boolean;
 }
 
 export interface AssessmentFormErrors {

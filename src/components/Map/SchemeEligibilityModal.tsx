@@ -71,6 +71,12 @@ export default function SchemeEligibilityModal({ scheme, onClose, onExit }: Sche
                 Please answer the following questions to check your eligibility for this specific scheme.
               </p>
 
+              {scheme.needsVerification && (
+                <div style={{ backgroundColor: 'rgba(234, 179, 8, 0.1)', padding: '12px', borderLeft: '4px solid var(--accent)', borderRadius: '4px', fontSize: '0.85rem', color: 'var(--text-primary)', marginBottom: '20px' }}>
+                  ⚠️ <strong>Note:</strong> We only have partial eligibility data for this scheme. The evaluation may not be completely accurate. Please verify on the official portal.
+                </div>
+              )}
+
               {showAge && (
                 <div className={styles.formGroup}>
                   <label className={styles.label}>Age</label>

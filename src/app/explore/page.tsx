@@ -11,10 +11,10 @@ import { ReasoningPanel } from '@/components/Scheme/ReasoningPanel';
 export default function ExplorePage() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredSchemes = SCHEMES_DATABASE.filter(s => 
-    s.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    s.tagline.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredSchemes = SCHEMES_DATABASE.filter(s => {
+    const textToSearch = [s.name, s.purpose, s.description].filter(Boolean).join(' ').toLowerCase();
+    return textToSearch.includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 2rem', width: '100%' }}>
@@ -40,8 +40,8 @@ export default function ExplorePage() {
           <Card key={scheme.id} style={{ display: 'flex', flexDirection: 'column' }}>
             <CardHeader style={{ paddingBottom: '0.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
-                <Badge variant="neutral">{scheme.ministry}</Badge>
-                <ConfidenceBadge state={scheme.maxFundingAmount > 2000000 ? "matched" : "needsInfo"} />
+                <Badge variant="neutral">{scheme.ministry || scheme.categoryTags?.[0] || 'Government Scheme'}</Badge>
+                <ConfidenceBadge state={scheme.needsVerification ? "needsInfo" : "matched"} />
               </div>
               <h3 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                 {scheme.name}
@@ -49,23 +49,25 @@ export default function ExplorePage() {
             </CardHeader>
             <CardContent style={{ flex: 1 }}>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                {scheme.tagline}
+                {scheme.purpose || scheme.description || 'Details pending verification.'}
               </p>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
-                <strong>Funding:</strong> Up to ₹ {scheme.maxFundingAmount.toLocaleString('en-IN')}
-              </div>
+              {scheme.maxFundingAmount && (
+                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                  <strong>Funding:</strong> Up to ₹ {scheme.maxFundingAmount.toLocaleString('en-IN')}
+                </div>
+              )}
               
               <ReasoningPanel 
                 evaluations={[
-                  { id: "1", rule: "Sector Alignment", status: "passed", detail: "Matches 'Manufacturing' priority" },
-                  { id: "2", rule: "Funding Request", status: "passed", detail: `Within ₹${(scheme.maxFundingAmount / 100000).toFixed(0)} Lakhs limit` },
-                  { id: "3", rule: "Demographic Data", status: scheme.maxFundingAmount > 2000000 ? "passed" : "needsInfo", detail: "SC/ST certification pending" }
+                  { id: "1", rule: "Sector Alignment", status: "passed", detail: scheme.categoryTags?.[0] ? `Matches '${scheme.categoryTags[0]}'` : "Matches general eligibility" },
+                  { id: "2", rule: "Funding Request", status: "passed", detail: scheme.maxFundingAmount ? `Within ₹${(scheme.maxFundingAmount / 100000).toFixed(0)} Lakhs limit` : "Within permissible limits" },
+                  { id: "3", rule: "Data Verification", status: scheme.needsVerification ? "needsInfo" : "passed", detail: scheme.needsVerification ? "Verification pending" : "Official data confirmed" }
                 ]}
               />
             </CardContent>
             <CardFooter style={{ paddingTop: 0 }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-                Status: Verified • Source: Official Guidelines
+                Status: {scheme.needsVerification ? 'Unverified' : 'Verified'} • {scheme.dataConfidence ? `Confidence: ${scheme.dataConfidence}%` : 'Source: Official Guidelines'}
               </div>
             </CardFooter>
           </Card>
