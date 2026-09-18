@@ -4,6 +4,7 @@ import "./globals.css";
 import { AssessmentProvider } from "@/context/AssessmentContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { AssistantPanel } from "@/components/assistant/AssistantPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <AssistantPanel />
         </AssessmentProvider>
       </body>
     </html>
