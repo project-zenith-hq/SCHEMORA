@@ -1,0 +1,20 @@
+.assessmentLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+}
+
+.assessmentContent {
+  flex: 1;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .assessmentLayout {
+    flex-direction: column;
+  }
+}

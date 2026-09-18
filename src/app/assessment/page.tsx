@@ -15,6 +15,8 @@ import { AnalysisTransition } from './components/AnalysisTransition';
 import { DocumentScanner } from './components/DocumentScanner';
 import { AutoFillReview } from './components/AutoFillReview';
 import { ExtractedData } from '@/utils/idExtractor';
+import { SidebarNavigator } from './components/SidebarNavigator';
+import styles from './page.module.css';
 
 export default function AssessmentPage() {
   const [step, setStep] = useState(0); // 0 = Entry Method Selection
@@ -211,8 +213,13 @@ export default function AssessmentPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-secondary)', padding: '2rem 0' }}>
-      {renderStepContent()}
+    <div className={styles.assessmentLayout}>
+      <SidebarNavigator currentStep={step} setStep={setStep} />
+      <div className={styles.assessmentContent}>
+        <div style={{ width: '100%' }}>
+          {renderStepContent()}
+        </div>
+      </div>
     </div>
   );
 }
