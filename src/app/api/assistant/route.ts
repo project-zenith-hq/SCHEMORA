@@ -78,12 +78,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // 3. Grok API Call (OpenAI-compatible)
-    const apiKey = process.env.GROK_API_KEY;
-    const model = process.env.GROK_MODEL || 'grok-beta';
-    const baseUrl = process.env.GROK_API_BASE_URL || 'https://api.x.ai/v1';
-    
-    if (apiKey && apiKey !== 'your-xai-api-key-here') {
+    // 3. Groq API Call (OpenAI-compatible)
+    const apiKey = process.env.GROQ_API_KEY;
+    const model = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
+    const baseUrl = process.env.GROQ_API_BASE_URL || 'https://api.groq.com/openai/v1';
+
+    if (apiKey && !apiKey.startsWith('gsk_')) {
+      console.warn('WARNING: GROQ_API_KEY is present but does not start with "gsk_". You may be using a key from the wrong provider.');
+    }
+
+    if (apiKey && apiKey !== 'your-key-here') {
       const response = await fetch(`${baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
@@ -100,7 +104,7 @@ export async function POST(req: Request) {
       });
 
       if (!response.ok) {
-        throw new Error(`Grok API Error: ${response.statusText}`);
+        throw new Error(`Groq API Error: ${response.statusText}`);
       }
 
       const data = await response.json();

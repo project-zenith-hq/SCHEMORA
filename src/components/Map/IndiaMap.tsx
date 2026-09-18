@@ -143,10 +143,10 @@ export default function IndiaMap() {
                   const isActive = activeStateDetails === stateName;
                   
                   const fillColor = isActive 
-                    ? "#E0A800" // active state
+                    ? "var(--accent-hover)" // active state
                     : isHovered 
-                      ? (isHighlighted ? "#E0A800" : "#E5E5E5") 
-                      : (isHighlighted ? "var(--accent)" : "#F7F7F5");
+                      ? (isHighlighted ? "var(--accent-hover)" : "var(--border-medium)") 
+                      : (isHighlighted ? "var(--accent)" : "var(--bg-tertiary)");
 
                   return (
                     <Geography
@@ -182,7 +182,7 @@ export default function IndiaMap() {
                       onClick={() => handleStateClick(stateName, geo)}
                       // In v3+, standard style props are passed directly to <path>
                       fill={fillColor}
-                      stroke={isActive || isHovered ? "#000000" : "#111111"}
+                      stroke={isActive || isHovered ? "var(--text-primary)" : "var(--text-secondary)"}
                       strokeWidth={isActive || isHovered ? 1 : 0.5}
                       style={{
                         outline: "none",
@@ -300,7 +300,7 @@ export default function IndiaMap() {
           <span>Active Hub (6+ Schemes)</span>
         </div>
         <div className={styles.legendItem}>
-          <div className={styles.legendColor} style={{ backgroundColor: '#F7F7F5', border: '1px solid #111' }} />
+          <div className={styles.legendColor} style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-strong)' }} />
           <span>No Node Data</span>
         </div>
       </div>
