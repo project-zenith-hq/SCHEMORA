@@ -67,7 +67,7 @@ export function AnalysisTransition() {
               fontSize: '0.75rem',
               fontWeight: 600,
               backgroundColor: idx < currentStep ? 'var(--status-success)' : (idx === currentStep ? 'var(--accent)' : 'var(--border-subtle)'),
-              color: idx <= currentStep ? '#fff' : 'inherit'
+              color: idx <= currentStep ? '#000' : 'inherit'
             }}>
               {idx < currentStep ? '✓' : idx + 1}
             </div>

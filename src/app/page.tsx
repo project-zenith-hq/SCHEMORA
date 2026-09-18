@@ -32,21 +32,42 @@ export default function Home() {
         {/* UI PREVIEW */}
         <div className={styles.uiPreview}>
           <div className={styles.previewHeader}>
-            <div className={styles.previewDot} />
-            <div className={styles.previewDot} />
-            <div className={styles.previewDot} />
+            <span className={styles.previewHeaderTitle}>SCHEMORA AI</span>
+            <div className={styles.previewDots}>
+              <div className={styles.previewDot} />
+            </div>
           </div>
           <div className={styles.previewBody}>
             <div className={styles.previewSidebar}>
-              <div className={`${styles.previewStep} ${styles.active}`}>01 Profile</div>
-              <div className={styles.previewStep}>02 Business</div>
-              <div className={styles.previewStep}>03 Funding</div>
-              <div className={styles.previewStep}>04 Match Results</div>
+              <div className={`${styles.previewStep} ${styles.active}`}>
+                <span className={styles.stepDot}></span> Your Profile
+              </div>
+              <div className={styles.previewStep}>Business Type</div>
+              <div className={styles.previewStep}>Funding</div>
+              <div className={styles.previewStep}>Location</div>
             </div>
             <div className={styles.previewMain}>
-              <div className={styles.skeletonLine}></div>
-              <div className={`${styles.skeletonLine} ${styles.short}`}></div>
-              <div className={styles.skeletonLine} style={{ marginTop: '2rem', height: '120px' }}></div>
+              <div className={styles.previewMatchHeader}>
+                <div className={styles.previewMatchBadge}>AI MATCH</div>
+                <div className={styles.previewMatchTitle}>Recommended schemes</div>
+              </div>
+              <div className={styles.previewCard}>
+                <div className={styles.previewCardTitle}>Prime Minister&apos;s Employment Generation Programme</div>
+                <div className={styles.previewCardTags}>
+                  <span className={styles.previewTag}>Manufacturing</span>
+                  <span className={styles.previewTag}>Service</span>
+                </div>
+                <div className={styles.previewCardRow}>
+                  <div className={styles.previewCardCol}>
+                    <div className={styles.previewCardLabel}>Max Support</div>
+                    <div className={styles.previewCardValue}>₹50 Lakhs</div>
+                  </div>
+                  <div className={styles.previewCardCol}>
+                    <div className={styles.previewCardLabel}>Subsidy</div>
+                    <div className={styles.previewCardValue}>15% - 35%</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

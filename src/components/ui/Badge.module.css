@@ -16,9 +16,9 @@
 }
 
 .success {
-  background-color: var(--accent-subtle);
-  color: var(--status-success);
-  border: 1px solid var(--accent-dim);
+  background-color: var(--accent-soft);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
 }
 
 .warning {

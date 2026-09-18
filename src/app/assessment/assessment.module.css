@@ -20,8 +20,8 @@
   width: 100vw;
   height: 100vh;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
   z-index: 0;
   pointer-events: none;
@@ -36,7 +36,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -165,7 +165,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #333;
+  border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   background: var(--bg-secondary);
   border-radius: var(--radius-sm);
@@ -185,7 +185,7 @@
 .stepConnector {
   flex: 1;
   height: 1px;
-  background: #262626;
+  background: var(--border-medium);
   position: relative;
   margin: 0 0.4rem;
   transition: background 0.3s ease;
@@ -197,9 +197,9 @@
 
 /* Active Step */
 .stepNodeActive .stepNodeNumber {
-  border-color: var(--text-primary);
-  color: #000;
-  background: var(--text-primary);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--accent);
 }
 
 .stepNodeActive .stepNodeLabel {
@@ -208,34 +208,23 @@
 
 /* Completed Step */
 .stepNodeCompleted .stepNodeNumber {
-  border-color: var(--text-dim);
-  color: var(--text-dim);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--bg-primary);
 }
 
 .stepNodeCompleted .stepNodeLabel {
   color: var(--text-primary);
 }
 
-/* FORM STAGE CARD */
 .stageCard {
   background: var(--bg-panel);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-md);
   padding: 2.5rem;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-}
-
-.stageCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  box-shadow: var(--shadow-sm);
 }
 
 .stageHeader {
@@ -293,7 +282,7 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
-  color: #cfcfcf;
+  color: var(--text-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -317,9 +306,9 @@
 }
 
 .textInput:focus, .selectInput:focus, .textareaInput:focus {
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
-  background-color: #0d0d0d;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 1px var(--border-focus);
+  background-color: var(--bg-primary);
 }
 
 .textInputError, .selectInputError, .textareaInputError {
@@ -362,19 +351,19 @@
 }
 
 .segmentedButton:hover {
-  border-color: #444;
+  border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .segmentedButtonActive {
-  border-color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent);
+  background: var(--accent-subtle);
   color: var(--text-primary);
 }
 
 /* FINANCIAL TELEMETRY HUD (STEP 03) */
 .fundingHud {
-  background: #080808;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 1.5rem;
@@ -394,7 +383,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .hudMetricItem {
@@ -427,7 +416,7 @@
 
 .fundingBarTrack {
   height: 8px;
-  background: #1a1a1a;
+  background: var(--border-subtle);
   border-radius: 4px;
   display: flex;
   overflow: hidden;
@@ -440,7 +429,7 @@
 }
 
 .fundingBarOwn {
-  background: #555;
+  background: var(--border-strong);
   height: 100%;
   transition: width 0.3s ease;
 }
@@ -460,7 +449,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: #0f0f0f;
+  background: var(--bg-secondary);
   border: 1px dashed var(--border-medium);
   border-radius: var(--radius-sm);
   margin-bottom: 1.5rem;
@@ -483,7 +472,7 @@
 
 .geoButton:hover {
   background: var(--text-primary);
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* STEP 05: REVIEW SCREEN */
@@ -506,7 +495,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 0.5rem;
 }
 
@@ -556,7 +545,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   margin-bottom: 1.5rem;
@@ -594,7 +583,7 @@
 
 .presetBtn:hover {
   background: var(--text-primary);
-  color: #000;
+  color: var(--text-primary);
 }
 
 /* BUTTON CONTROLS */
@@ -620,14 +609,14 @@
 }
 
 .secondaryBtn:hover {
-  border-color: #555;
+  border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .primaryBtn {
   background: var(--text-primary);
   border: 1px solid var(--text-primary);
-  color: #000;
+  color: var(--bg-primary);
   padding: 0.8rem 2rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -666,7 +655,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.05);
   animation: scanline 3s linear infinite;
   pointer-events: none;
 }
@@ -705,7 +694,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 1.25rem;
-  background: #0a0a0a;
+  background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   transition: all 0.3s ease;
@@ -713,12 +702,12 @@
 
 .analysisStepRowActive {
   border-color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-secondary);
 }
 
 .analysisStepRowDone {
-  border-color: #262626;
-  background: #0d0d0d;
+  border-color: var(--border-subtle);
+  background: var(--bg-secondary);
 }
 
 .analysisStepName {
@@ -739,7 +728,7 @@
 .statusSpinner {
   width: 14px;
   height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-top-color: var(--text-primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
@@ -806,14 +795,14 @@
 }
 
 .filterTab:hover {
-  border-color: #444;
+  border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .filterTabActive {
   border-color: var(--text-primary);
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--accent-subtle);
 }
 
 .sortRow {
@@ -860,12 +849,12 @@
 }
 
 .schemeCard:hover {
-  border-color: #333;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+  border-color: var(--border-strong);
+  box-shadow: 0 8px 30px var(--shadow-md);
 }
 
 .schemeCardEligible {
-  border-left: 3px solid var(--accent);
+  border-left: 4px solid var(--accent);
 }
 
 .schemeCardTop {
@@ -907,7 +896,7 @@
   flex-direction: column;
   align-items: center;
   min-width: 100px;
-  background: #080808;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   padding: 0.75rem;
   border-radius: var(--radius-sm);
@@ -943,9 +932,9 @@
 }
 
 .pillEligible {
-  background: var(--accent-dim);
-  color: var(--accent);
-  border: 1px solid var(--accent-dim);
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
 }
 
 .pillPartial {
@@ -956,8 +945,8 @@
 
 /* WHY THIS MATCHES BOX */
 .whyMatchBox {
-  background: #0a0a0a;
-  border: 1px solid #1c1c1c;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   padding: 1rem;
   margin-bottom: 1.25rem;
@@ -976,7 +965,7 @@
 
 .whyMatchText {
   font-size: 0.85rem;
-  color: #ccc;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -985,12 +974,12 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 0.9rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-secondary);
   border-left: 2px solid var(--text-dim);
   border-radius: var(--radius-sm);
   margin-bottom: 1.25rem;
   font-size: 0.82rem;
-  color: #eee;
+  color: var(--text-primary);
 }
 
 .schemeStatsRow {
@@ -998,7 +987,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid var(--border-subtle);
   margin-bottom: 1.25rem;
 }
 
@@ -1027,7 +1016,7 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 1rem;
-  border-top: 1px solid #1a1a1a;
+  border-top: 1px solid var(--border-subtle);
 }
 
 .secondaryCardActions {
@@ -1050,14 +1039,14 @@
 }
 
 .miniBtn:hover {
-  border-color: #555;
+  border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
 .miniBtnActive {
   border-color: var(--text-primary);
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--accent-subtle);
 }
 
 /* SCHEME DETAIL DRAWER / MODAL */
@@ -1078,9 +1067,9 @@
 }
 
 .modalWindow {
-  background: #0c0c0c;
+  background: var(--bg-primary);
   border: 1px solid var(--border-medium);
-  box-shadow: 0 15px 60px rgba(0, 0, 0, 0.95);
+  box-shadow: 0 15px 60px var(--shadow-lg);
   border-radius: var(--radius-md);
   max-width: 900px;
   width: 100%;
@@ -1095,7 +1084,7 @@
   align-items: center;
   padding: 1.25rem 2rem;
   border-bottom: 1px solid var(--border-subtle);
-  background: #080808;
+  background: var(--bg-secondary);
 }
 
 .modalCloseBtn {
@@ -1122,7 +1111,7 @@
 
 .detailSection {
   margin-bottom: 2rem;
-  border-bottom: 1px solid #1a1a1a;
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 1.5rem;
 }
 
@@ -1157,18 +1146,18 @@
 }
 
 .rulePassed {
-  color: #ddd;
+  color: var(--text-primary);
 }
 
 .rulePassed::before {
   content: '✓';
-  color: var(--accent);
+  color: var(--accent-dark);
   font-weight: 700;
   font-family: var(--font-mono);
 }
 
 .rulePending {
-  color: #bbb;
+  color: var(--status-warning);
 }
 
 .rulePending::before {
@@ -1179,7 +1168,7 @@
 }
 
 .ruleFailed {
-  color: #f88;
+  color: var(--status-error);
 }
 
 .ruleFailed::before {
@@ -1191,7 +1180,7 @@
 
 /* FINANCIAL ESTIMATE CALCULATOR */
 .calculatorBox {
-  background: #080808;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 1.5rem;
@@ -1227,8 +1216,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   padding: 1.25rem;
-  background: #111;
-  border: 1px solid #222;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   text-align: center;
 }
@@ -1252,7 +1241,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: #090909;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   padding: 0.6rem 1rem;
   border-radius: var(--radius-sm);
@@ -1262,7 +1251,7 @@
 }
 
 .docItem:hover {
-  border-color: #333;
+  border-color: var(--border-strong);
 }
 
 .docCheckbox {
@@ -1272,7 +1261,7 @@
 }
 
 .docChecked {
-  color: #777;
+  color: var(--text-muted);
   text-decoration: line-through;
 }
 
@@ -1285,7 +1274,7 @@
 }
 
 .partnerCard {
-  background: #090909;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 1rem;
@@ -1319,7 +1308,7 @@
 
 /* ASK SCHEMORA CONTEXTUAL ASSISTANT */
 .assistantBox {
-  background: #080808;
+  background: var(--bg-secondary);
   border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   padding: 1.25rem;
@@ -1344,8 +1333,8 @@
 }
 
 .quickQuestionPill {
-  background: #121212;
-  border: 1px solid #282828;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
   color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: 0.72rem;
@@ -1372,9 +1361,9 @@
 
 .chatBubbleUser {
   align-self: flex-end;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  color: #fff;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-strong);
+  color: var(--bg-primary);
   padding: 0.5rem 0.8rem;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -1383,9 +1372,9 @@
 
 .chatBubbleAi {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-medium);
-  color: #ddd;
+  color: var(--text-primary);
   padding: 0.6rem 0.9rem;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -1400,9 +1389,9 @@
 
 .chatInput {
   flex: 1;
-  background: #000;
-  border: 1px solid #333;
-  color: #fff;
+  background: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  color: var(--bg-primary);
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
   border-radius: var(--radius-sm);
@@ -1410,13 +1399,13 @@
 }
 
 .chatInput:focus {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--border-focus);
 }
 
 .chatSendBtn {
   background: var(--text-primary);
   border: none;
-  color: #000;
+  color: var(--text-primary);
   font-family: var(--font-mono);
   font-weight: 700;
   font-size: 0.75rem;
@@ -1431,7 +1420,7 @@
   bottom: 1.5rem;
   left: 50%;
   transform: translateX(-50%);
-  background: #000;
+  background: var(--text-primary);
   border: 1px solid var(--text-primary);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   border-radius: var(--radius-md);
@@ -1446,7 +1435,7 @@
 .compareInfo {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: #fff;
+  color: var(--bg-primary);
 }
 
 .compareInfo strong {
@@ -1463,25 +1452,25 @@
 
 .compareTable th, .compareTable td {
   padding: 0.75rem 1rem;
-  border: 1px solid #222;
+  border: 1px solid var(--border-medium);
   text-align: left;
 }
 
 .compareTable th {
-  background: #111;
+  background: var(--bg-secondary);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-dim);
 }
 
 .compareTable td {
-  background: #090909;
+  background: var(--bg-secondary);
 }
 
 /* EMPTY RESULTS STATE */
 .emptyStateBox {
   background: var(--bg-panel);
-  border: 1px dashed #333;
+  border: 1px dashed var(--border-strong);
   border-radius: var(--radius-md);
   padding: 3.5rem 2rem;
   text-align: center;
@@ -1506,8 +1495,8 @@
   max-width: 500px;
   margin: 0 auto;
   text-align: left;
-  background: #090909;
-  border: 1px solid #1f1f1f;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   padding: 1.25rem;
   font-size: 0.85rem;

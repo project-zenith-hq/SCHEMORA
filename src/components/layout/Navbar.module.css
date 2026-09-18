@@ -42,14 +42,28 @@
 }
 
 .link {
+  position: relative;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-muted);
   transition: color 0.2s ease;
+  padding: 0.5rem 0;
 }
 
 .link:hover, .activeLink {
   color: var(--text-primary);
+}
+
+.activeLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 2px;
+  background-color: var(--accent);
+  border-radius: 2px;
 }
 
 .actions {

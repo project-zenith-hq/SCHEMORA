@@ -7,27 +7,29 @@
   --bg-elevated: #FFFFFF;
   --bg-surface: #F2F2F0;
 
-  /* Accent — Refined, sophisticated green */
-  --accent: #1D8A50;
-  --accent-dim: rgba(29, 138, 80, 0.1);
-  --accent-subtle: rgba(29, 138, 80, 0.05);
-  --accent-hover: #167040;
+  /* Accent — Bright, saturated amber */
+  --accent: #F5B800;
+  --accent-dim: rgba(245, 184, 0, 0.1);
+  --accent-subtle: rgba(245, 184, 0, 0.05);
+  --accent-hover: #E0A800;
+  --accent-soft: #FFFDF5;
+  --accent-dark: #B38000;
 
   /* Text Hierarchy */
-  --text-primary: #050505;
-  --text-secondary: #333333;
-  --text-muted: #555555;
-  --text-dim: #888888;
+  --text-primary: #111111;
+  --text-secondary: #6B6B6B;
+  --text-muted: #8A8A8A;
+  --text-dim: #A0A0A0;
   --text-inverse: #FFFFFF;
 
   /* Borders — Subtle Neutral Grays */
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.12);
-  --border-strong: rgba(0, 0, 0, 0.2);
+  --border-subtle: #F0F0F0;
+  --border-medium: #E5E5E5;
+  --border-strong: #CCCCCC;
   --border-focus: var(--accent);
 
   /* Status Colors */
-  --status-success: #1D8A50;
+  --status-success: #F5B800;
   --status-warning: #B37D26;
   --status-error: #D14343;
 
@@ -42,17 +44,17 @@
 
   /* Radii */
   --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
   
   /* Typography */
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), 'SF Mono', 'Cascadia Code', monospace;
+  --font-sans: 'Inter', var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', var(--font-geist-mono), 'SF Mono', 'Cascadia Code', monospace;
   
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 * {

@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
   cursor: pointer;
   white-space: nowrap;
@@ -16,24 +16,28 @@
 
 /* Variants */
 .primary {
-  background-color: var(--text-primary);
-  color: var(--bg-primary);
-  border: 1px solid var(--text-primary);
+  background-color: var(--accent);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
 }
 
 .primary:hover:not(:disabled) {
-  background-color: #222;
-  border-color: #222;
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(245, 184, 0, 0.2);
 }
 
 .secondary {
-  background-color: var(--bg-surface);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
-  border: 1px solid transparent;
+  border: 1px solid var(--text-primary);
 }
 
 .secondary:hover:not(:disabled) {
-  background-color: #e5e5e5;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  transform: scale(1.02);
 }
 
 .outline {
@@ -55,6 +59,17 @@
 .ghost:hover:not(:disabled) {
   color: var(--text-primary);
   background-color: var(--bg-secondary);
+}
+
+.accent {
+  background-color: var(--accent);
+  color: var(--text-primary);
+  border: 1px solid var(--accent);
+}
+
+.accent:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
 }
 
 /* Sizes */
