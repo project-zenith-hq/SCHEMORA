@@ -1,0 +1,89 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* The signature cut-corner motif */
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 6px 6px 0;
+  border-style: solid;
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+}
+
+/* Status: Matched */
+.badge.matched {
+  background-color: var(--accent);
+  color: #000;
+  border: 1px solid var(--accent);
+}
+.badge.matched::before {
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+}
+
+/* Status: Needs Info */
+.badge.needsInfo {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px dashed var(--border-medium);
+}
+.badge.needsInfo::before {
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+}
+
+/* Status: Not Matched */
+.badge.notMatched {
+  background-color: var(--bg-primary);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+.badge.notMatched::before {
+  border-color: transparent; /* No cut corner needed or hide it */
+}
+
+/* Status: Data Not Verified */
+.badge.dataNotVerified {
+  background-color: var(--bg-primary);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.badge.dataNotVerified::before {
+  border-color: transparent;
+}
+
+/* Status Dot indicator */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.matched .dot {
+  background-color: #000;
+}
+
+.needsInfo .dot {
+  background-color: var(--text-primary);
+}
+
+.notMatched .dot {
+  background-color: var(--border-medium);
+}
+
+.dataNotVerified .dot {
+  background-color: var(--accent);
+  box-shadow: 0 0 4px var(--accent);
+}

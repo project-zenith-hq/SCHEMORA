@@ -138,6 +138,28 @@ body::before {
   letter-spacing: -0.05em;
 }
 
+/* Custom Cursor Rules */
+a, button, [role="button"], input[type="submit"], input[type="reset"] {
+  cursor: pointer;
+}
+
+/* Tabular Data Card Style */
+.tabular-data-card {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tabular-data-card:hover {
+  border-color: var(--text-primary);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 1);
+  transition: all 0.2s ease;
+}
+
 /* Animations — Clean, Subtle */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }

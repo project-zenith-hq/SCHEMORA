@@ -1,0 +1,106 @@
+.trackerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 24px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.trackerList {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 8px;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepNode {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-medium);
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Signature Cut corner for the node */
+.stepNode::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  border-width: 0 6px 6px 0;
+  border-style: solid;
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+  transition: all 0.3s ease;
+}
+
+.stepLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.connector {
+  width: 32px;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+/* States */
+.stepItem.completed .stepNode {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.stepItem.completed .stepNode::after {
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+}
+
+.stepItem.completed .stepLabel {
+  color: var(--text-primary);
+}
+
+.stepItem.completed .connector {
+  background-color: var(--text-primary);
+}
+
+.stepItem.active .stepNode {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #000;
+  box-shadow: 0 0 8px rgba(224, 168, 0, 0.4);
+}
+
+.stepItem.active .stepNode::after {
+  border-color: var(--bg-primary) var(--bg-primary) transparent transparent;
+}
+
+.stepItem.active .stepLabel {
+  color: var(--text-primary);
+  font-weight: 700;
+}

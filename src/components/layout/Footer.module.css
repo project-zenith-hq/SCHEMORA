@@ -65,13 +65,32 @@
 }
 
 .bottomSection {
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-medium);
+}
+
+.accuracyNote {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.accuracyNote strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.bottomBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-subtle);
-  color: var(--text-dim);
   font-size: 0.85rem;
+  color: var(--text-dim);
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -91,6 +110,7 @@
 @media (max-width: 768px) {
   .topSection {
     flex-direction: column;
+    gap: 3rem;
   }
   
   .links {
@@ -98,8 +118,14 @@
     gap: 2rem;
   }
   
-  .bottomSection {
+  .bottomBar {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .team {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

@@ -112,7 +112,7 @@ export const AssistantPanel = () => {
                   <RobotIcon size={24} />
                 </div>
               )}
-              <div className={`${styles.bubble} ${styles[msg.sender]}`}>
+              <div className={`${styles.bubble} ${styles[msg.sender]}`} dir="auto">
                 {msg.text.split('\n').map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
@@ -159,6 +159,7 @@ export const AssistantPanel = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend(inputValue)}
+            dir="auto"
           />
           <button 
             className={styles.sendBtn} 
