@@ -218,7 +218,7 @@ export function evaluateDeterministicEligibility(
       requiredOwnContribution = Math.round(profile.projectCost * (scheme.subsidyRules.ownContributionGeneral / 100));
     }
 
-    const eligibleCapitalBasis = Math.min(profile.projectCost, scheme.maxFundingAmount);
+    const eligibleCapitalBasis = scheme.maxFundingAmount ? Math.min(profile.projectCost, scheme.maxFundingAmount) : profile.projectCost;
     calculatedSubsidyAmount = Math.round(eligibleCapitalBasis * (calculatedSubsidyPercent / 100));
 
     matchedRules.push(

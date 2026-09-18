@@ -34,7 +34,7 @@ export async function POST(req: Request) {
       reply = `You must prepare your Detailed Project Report (DPR). Also ensure you have your ${profileContext.category.toUpperCase()} category certificate, Aadhaar, PAN, and quotations for the machinery. You can download the full personalized checklist from the dashboard above.`;
     } 
     else if (lowerQ.includes('next') || lowerQ.includes('what should i do')) {
-      reply = `Your next step is to approach your local ${schemeContext.scheme.channelPartners[0]?.name || 'District Industries Centre'}. Make sure you have your DPR and documents ready. Let me know if you need help understanding the EMI or project report requirements.`;
+      reply = `Your next step is to approach your local ${schemeContext.scheme.channelPartners?.[0]?.name || 'District Industries Centre'}. Make sure you have your DPR and documents ready. Let me know if you need help understanding the EMI or project report requirements.`;
     }
     else {
       reply = `I have analyzed your profile against ${schemeContext.scheme.name}. Based on your specific details (${profileContext.city}, ₹${profileContext.projectCost.toLocaleString('en-IN')} project), you meet the primary criteria. Let me know if you have questions about the documents, interest rates, or subsidies!`;

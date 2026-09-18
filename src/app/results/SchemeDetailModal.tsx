@@ -13,9 +13,9 @@ interface Props {
 
 export function SchemeDetailModal({ result, onClose }: Props) {
   const { scheme, eligibility } = result;
-  const [calcLoan, setCalcLoan] = useState<number>(scheme.maxFundingAmount / 2);
-  const [calcRate, setCalcRate] = useState<number>(scheme.interestRateMin);
-  const [calcTenure, setCalcTenure] = useState<number>(scheme.repaymentTenureYears);
+  const [calcLoan, setCalcLoan] = useState<number>((scheme.maxFundingAmount || 100000) / 2);
+  const [calcRate, setCalcRate] = useState<number>(scheme.interestRateMin || 8.0);
+  const [calcTenure, setCalcTenure] = useState<number>(scheme.repaymentTenureYears || 5);
 
   const emiData = calculateEMI(calcLoan, calcRate, calcTenure);
 
@@ -119,38 +119,50 @@ export function SchemeDetailModal({ result, onClose }: Props) {
 
           <h3 className={styles.sectionTitle}>Where to Apply</h3>
           <div style={{ border: '1px solid var(--border-medium)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-medium)' }}>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Partner</th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Type</th>
-                  <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Distance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {scheme.channelPartners.map((partner) => (
-                  <tr key={partner.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                    <td style={{ padding: '0.75rem 1rem' }}>{partner.name}</td>
-                    <td style={{ padding: '0.75rem 1rem', color: 'var(--text-muted)' }}>{partner.type}</td>
-                    <td style={{ padding: '0.75rem 1rem' }}>{partner.distanceKm} km</td>
+            {scheme.channelPartners && scheme.channelPartners.length > 0 ? (
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                <thead>
+                  <tr style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-medium)' }}>
+                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Partner</th>
+                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Type</th>
+                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Distance</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {scheme.channelPartners.map((partner) => (
+                    <tr key={partner.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <td style={{ padding: '0.75rem 1rem' }}>{partner.name}</td>
+                      <td style={{ padding: '0.75rem 1rem', color: 'var(--text-muted)' }}>{partner.type}</td>
+                      <td style={{ padding: '0.75rem 1rem' }}>{partner.distanceKm} km</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', backgroundColor: 'var(--bg-secondary)' }}>
+                Channel partner data not yet available for this scheme.
+              </div>
+            )}
           </div>
         </div>
 
         {/* Sidebar / AI Chat */}
         <div className={styles.modalSidebar}>
           <h3 className={styles.sectionTitle}>Document Checklist</h3>
-          <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
-            {scheme.requiredDocuments.map((doc, idx) => (
-              <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
-                <input type="checkbox" style={{ accentColor: 'var(--accent)' }} />
-                <span>{doc}</span>
-              </li>
-            ))}
-          </ul>
+          {scheme.requiredDocuments && scheme.requiredDocuments.length > 0 ? (
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
+              {scheme.requiredDocuments.map((doc, idx) => (
+                <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem' }}>
+                  <input type="checkbox" style={{ accentColor: 'var(--accent)' }} />
+                  <span>{doc}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div style={{ padding: '1rem 0', color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1rem' }}>
+              Document checklist not yet available for this scheme.
+            </div>
+          )}
 
           <h3 className={styles.sectionTitle}>Ask SCHEMORA</h3>
           <div className={styles.chatContainer}>
