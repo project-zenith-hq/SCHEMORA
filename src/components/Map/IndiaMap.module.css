@@ -78,8 +78,8 @@
   position: absolute;
   bottom: 16px;
   left: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(4px);
+  background: var(--bg-primary);
+  opacity: 0.95;
   padding: 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
@@ -175,8 +175,8 @@
   padding: 10px 12px 10px 36px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
+  background: var(--bg-primary);
+  opacity: 0.95;
   font-size: 0.85rem;
   color: var(--text-primary);
   box-shadow: var(--shadow-sm);

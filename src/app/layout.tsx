@@ -6,6 +6,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AssistantPanel } from "@/components/assistant/AssistantPanel";
 import { JourneyTrackerWrapper } from "@/components/layout/JourneyTrackerWrapper";
+import { SettingsProvider } from "@/context/SettingsContext";
+import { SettingsPanel } from "@/components/layout/SettingsPanel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,17 +33,21 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        <AssessmentProvider>
-          <Navbar />
-          <JourneyTrackerWrapper />
-          <main className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <AssistantPanel />
-        </AssessmentProvider>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <SettingsProvider>
+          <AssessmentProvider>
+            <Navbar />
+            <JourneyTrackerWrapper />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+            <AssistantPanel />
+            <SettingsPanel />
+          </AssessmentProvider>
+        </SettingsProvider>
       </body>
     </html>
   );
