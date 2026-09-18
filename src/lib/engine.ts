@@ -101,6 +101,15 @@ export function evaluateDeterministicEligibility(
     matchedRules.push(`Applicant age (${profile.age} yrs) complies with scheme criteria.`);
   }
 
+  // 1.5 Income Verification
+  if (rules.minIncome && profile.annualIncome < rules.minIncome) {
+    failedRules.push(`Annual income must be at least ${formatINR(rules.minIncome)}.`);
+  } else if (rules.maxIncome && profile.annualIncome > rules.maxIncome) {
+    failedRules.push(`Annual income exceeds maximum allowable limit of ${formatINR(rules.maxIncome)}.`);
+  } else if (rules.minIncome || rules.maxIncome) {
+    matchedRules.push(`Applicant income (${formatINR(profile.annualIncome)}) complies with scheme criteria.`);
+  }
+
   // 2. Demographic & Gender Constraints
   if (rules.allowedGenders || rules.allowedCategories) {
     const isGenderAllowed = rules.allowedGenders ? rules.allowedGenders.includes(profile.gender) : true;
@@ -240,6 +249,25 @@ export function computeAIMatch(
   eligibility: EligibilityEvaluation
 ): SchemeMatchResult {
   let score = 50; // Base score
+  let dataNotVerified = false;
+  
+  if (scheme.needsVerification) {
+    dataNotVerified = true;
+    let personalizedExplanation = "We have this scheme in our database, but haven't yet fully verified its current eligibility rules — check the official source before relying on this.";
+    if (scheme.verificationNote) {
+      personalizedExplanation += ` Note: ${scheme.verificationNote}`;
+    }
+    
+    return {
+      scheme,
+      matchScore: score,
+      eligibility,
+      personalizedExplanation,
+      keyBenefitHighlight: "Requires Official Verification",
+      recommendedNextStep: "Please consult official guidelines.",
+      dataNotVerified: true
+    };
+  }
 
   // 1. Eligibility Weight (0 or +25)
   if (eligibility.isEligible) {
@@ -345,8 +373,11 @@ export function runSchemoraMatching(profile: UserProfile): SchemeMatchResult[] {
     return computeAIMatch(profile, scheme, eligibility);
   });
 
-  // Sort: Eligible first, then descending by matchScore
+  // Sort: Verified first, then Eligible first, then descending by matchScore
   return results.sort((a, b) => {
+    if (a.dataNotVerified && !b.dataNotVerified) return 1;
+    if (!a.dataNotVerified && b.dataNotVerified) return -1;
+    
     if (a.eligibility.isEligible && !b.eligibility.isEligible) return -1;
     if (!a.eligibility.isEligible && b.eligibility.isEligible) return 1;
     return b.matchScore - a.matchScore;

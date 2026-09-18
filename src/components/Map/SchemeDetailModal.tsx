@@ -43,6 +43,11 @@ export default function SchemeDetailModal({ scheme, onClose }: SchemeDetailModal
           <div className={styles.tagline}>{scheme.tagline || 'Not specified in current data'}</div>
           
           <div className={styles.ctaSection}>
+            {scheme.needsVerification && (
+              <div className={styles.verificationAlert}>
+                ⚠️ <strong>Data Pending Verification:</strong> {scheme.verificationNote || "This scheme's full eligibility rules and financial terms require official source lookup."}
+              </div>
+            )}
             <button className={styles.primaryBtn} onClick={() => setShowEligibility(true)}>
               Check if you're eligible for this scheme
             </button>
@@ -112,8 +117,9 @@ export default function SchemeDetailModal({ scheme, onClose }: SchemeDetailModal
           </div>
           
           <div className={styles.footerInfo}>
-            <div className={styles.confidenceIndicator}>
-              <span className={styles.indicatorDot}></span> Data verified from official sources
+            <div className={styles.confidenceIndicator} style={{ color: scheme.needsVerification ? 'var(--text-secondary)' : 'var(--status-success, #10b981)' }}>
+              <span className={styles.indicatorDot} style={{ backgroundColor: scheme.needsVerification ? 'var(--accent)' : 'currentColor' }}></span> 
+              {scheme.needsVerification ? 'Data pending official verification' : 'Data verified from official sources'}
             </div>
             {scheme.officialPortalUrl && (
               <a href={scheme.officialPortalUrl} target="_blank" rel="noreferrer" className={styles.sourceLink}>

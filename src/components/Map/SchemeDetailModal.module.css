@@ -99,7 +99,19 @@
   padding: 16px;
   margin-bottom: 24px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.verificationAlert {
+  background-color: rgba(234, 179, 8, 0.1);
+  border-left: 4px solid var(--accent);
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  width: 100%;
 }
 
 .primaryBtn {
@@ -204,7 +216,6 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: currentColor;
 }
 
 .sourceLink {
