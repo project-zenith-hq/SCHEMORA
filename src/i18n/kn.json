@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "ಹೋಮ್",
+    "howItWorks": "ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
+    "exploreSchemes": "ಯೋಜನೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
+    "resources": "ಸಂಪನ್ಮೂಲಗಳು",
+    "about": "ನಮ್ಮ ಬಗ್ಗೆ",
+    "startAssessment": "ಮೌಲ್ಯಮಾಪನ ಪ್ರಾರಂಭಿಸಿ",
+    "openSettings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ",
+    "menu": "ಮೆನು"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "ಹೊಂದಿಸಿ. ಹಣ ಪಡೆಯಿರಿ. ಬೆಳೆಯಿರಿ.",
+    "headlineText": "ನಿಮ್ಮ ವ್ಯಾಪಾರ.",
+    "subheadline": "ಸೂಕ್ಷ್ಮ-ಉದ್ಯಮಿಗಳನ್ನು ರಾಜ್ಯ ಮತ್ತು ಕೇಂದ್ರ ಸರ್ಕಾರದ ಯೋಜನೆಗಳೊಂದಿಗೆ ತಕ್ಷಣ ಸಂಪರ್ಕಿಸುವ ಬುದ್ಧಿವಂತ ಎಂಜಿನ್.",
+    "ctaStart": "ನಿಮ್ಮ ಮೌಲ್ಯಮಾಪನ ಪ್ರಾರಂಭಿಸಿ",
+    "ctaExplore": "ಯೋಜನೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "ಸಕ್ರಿಯ ಯೋಜನೆಗಳು",
+      "successRate": "ಮ್ಯಾಚ್ ದರ",
+      "banks": "ನೋಡಲ್ ಬ್ಯಾಂಕ್‌ಗಳು"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "ಆದ್ಯತೆಗಳು",
+    "close": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಮುಚ್ಚಿ",
+    "appearance": "ಕಾಣಿಸಿಕೆ",
+    "theme": "ಥೀಮ್",
+    "themeDesc": "ನಿಮ್ಮ ವಿಷುಯಲ್ ಶೈಲಿಯನ್ನು ಆರಿಸಿ",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "ಲೈಟ್",
+      "dark": "ಡಾರ್ಕ್",
+      "system": "ಸಿಸ್ಟಮ್"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "ಮಾಹಿತಿ ಸಾಂದ್ರತೆ",
+    "densityDesc": "ಸ್ಪೇಸಿಂಗ್ ಸ್ಕೇಲ್ ಹೊಂದಿಸಿ",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "ಆರಾಮದಾಯಕ",
+      "compact": "ಕಾಂಪ್ಯಾಕ್ಟ್"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "ಲಭ್ಯತೆ ಮತ್ತು ಭಾಷೆ",
+    "language": "ಆದ್ಯತೆಯ ಭಾಷೆ",
+    "languageDesc": "ಸಹಾಯಕ ಮತ್ತು ವಿಷಯ ಸ್ಥಳೀಕರಣ",
+    "reduceMotion": "ಅನಿಮೇಶನ್ ಕಡಿಮೆ ಮಾಡಿ",
+    "reduceMotionDesc": "ಅನಗತ್ಯ ಅನಿಮೇಶನ್‌ಗಳನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ",
+    "session": "ಸೆಶನ್",
+    "clearProgress": "ಮೌಲ್ಯಮಾಪನ ಪ್ರಗತಿಯನ್ನು ತೆಗೆದುಹಾಕಿ",
+    "clearProgressConfirm": "ನಿಮ್ಮ ಮೌಲ್ಯಮಾಪನ ಪ್ರಗತಿಯನ್ನು ನಿಜವಾಗಿಯೂ ತೆಗೆದುಹಾಕಲು ಬಯಸುವಿರಾ? ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗುವುದಿಲ್ಲ.",
+    "version": "SCHEMORA ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "ನಿಮ್ಮ ರಾಜ್ಯವನ್ನು ಹುಡುಕಿ...",
+    "zoomIn": "ಜೂಮ್ ಇನ್",
+    "zoomOut": "ಜೂಮ್ ಔಟ್",
+    "resetView": "ವೀಕ್ಷಣೆ ರೀಸೆಟ್ ಮಾಡಿ",
+    "eligibleSchemes": "ಅರ್ಹ ಯೋಜನೆಗಳು",
+    "channelPartners": "ಚಾನೆಲ್ ಪಾರ್ಟ್ನರ್‌ಗಳು",
+    "topSchemes": "ಪ್ರಮುಖ ಲಭ್ಯ ಯೋಜನೆಗಳು",
+    "viewAllIn": "ಎಲ್ಲಾ ನೋಡಿ:",
+    "noNodeData": "ಈ ರಾಜ್ಯಕ್ಕೆ ಇನ್ನೂ ಯಾವುದೇ ಬಲವಾದ ನೋಡಲ್ ಡೇಟಾ ಮ್ಯಾಪ್ ಮಾಡಲಾಗಿಲ್ಲ. ಕವರೇಜ್ ಸಕ್ರಿಯವಾಗಿ ವಿಸ್ತರಿಸುತ್ತಿದೆ.",
+    "activeHub": "ಸಕ್ರಿಯ ಹಬ್",
+    "coverageStatus": "ಕವರೇಜ್ ಸ್ಥಿತಿ",
+    "noNodeDataLegend": "ನೋಡ್ ಡೇಟಾ ಇಲ್ಲ",
+    "active": "ಸಕ್ರಿಯ"
   }
 }

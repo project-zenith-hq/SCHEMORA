@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "मुख्यपृष्ठ",
+    "howItWorks": "हे कसे कार्य करते",
+    "exploreSchemes": "योजना शोधा",
+    "resources": "संसाधने",
+    "about": "आमच्याबद्दल",
+    "startAssessment": "मूल्यांकन सुरू करा",
+    "openSettings": "सेटिंग्ज उघडा",
+    "menu": "मेनू"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "जुळवा. निधी मिळवा. वाढा.",
+    "headlineText": "तुमचा व्यवसाय.",
+    "subheadline": "सूक्ष्म-उद्योजकांना राज्य आणि केंद्र सरकारच्या योजनांशी तात्काळ जोडणारे बुद्धिमान इंजिन.",
+    "ctaStart": "तुमचे मूल्यांकन सुरू करा",
+    "ctaExplore": "योजना शोधा",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "सक्रिय योजना",
+      "successRate": "मॅच दर",
+      "banks": "नोडल बँका"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "प्राधान्ये",
+    "close": "सेटिंग्ज बंद करा",
+    "appearance": "स्वरूप",
+    "theme": "थीम",
+    "themeDesc": "तुमची व्हिज्युअल शैली निवडा",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "लाइट",
+      "dark": "डार्क",
+      "system": "सिस्टम"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "माहिती घनता",
+    "densityDesc": "स्पेसिंग स्केल समायोजित करा",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "आरामदायी",
+      "compact": "कॉम्पॅक्ट"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "सुलभता आणि भाषा",
+    "language": "पसंतीची भाषा",
+    "languageDesc": "सहाय्यक आणि सामग्री स्थानिकीकरण",
+    "reduceMotion": "अॅनिमेशन कमी करा",
+    "reduceMotionDesc": "अनावश्यक अॅनिमेशन अक्षम करा",
+    "session": "सत्र",
+    "clearProgress": "मूल्यांकन प्रगती हटवा",
+    "clearProgressConfirm": "तुम्हाला खात्री आहे की तुम्ही मूल्यांकन प्रगती हटवू इच्छिता? हे पूर्ववत करता येणार नाही.",
+    "version": "SCHEMORA प्लॅटफॉर्म v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "तुमचे राज्य शोधा...",
+    "zoomIn": "झूम इन",
+    "zoomOut": "झूम आउट",
+    "resetView": "दृश्य रीसेट करा",
+    "eligibleSchemes": "पात्र योजना",
+    "channelPartners": "चॅनेल भागीदार",
+    "topSchemes": "शीर्ष उपलब्ध योजना",
+    "viewAllIn": "सर्व पहा:",
+    "noNodeData": "या राज्यासाठी अद्याप कोणताही मजबूत नोडल डेटा मॅप केलेला नाही. कव्हरेज सक्रियपणे विस्तारत आहे.",
+    "activeHub": "सक्रिय हब",
+    "coverageStatus": "कव्हरेज स्थिती",
+    "noNodeDataLegend": "नोड डेटा नाही",
+    "active": "सक्रिय"
   }
 }

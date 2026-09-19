@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "હોમ",
+    "howItWorks": "કેવી રીતે કામ કરે છે",
+    "exploreSchemes": "યોજનાઓ શોધો",
+    "resources": "સંસાધનો",
+    "about": "અમારા વિશે",
+    "startAssessment": "મૂલ્યાંકન શરૂ કરો",
+    "openSettings": "સેટિંગ્સ ખોલો",
+    "menu": "મેનુ"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "મેચ કરો. ફંડ મેળવો. વધો.",
+    "headlineText": "તમારો વ્યવસાય.",
+    "subheadline": "સૂક્ષ્મ-ઉદ્યમીઓને રાજ્ય અને કેન્દ્ર સરકારની યોજનાઓ સાથે તરત જોડતું બુદ્ધિશાળી એન્જિન.",
+    "ctaStart": "તમારું મૂલ્યાંકન શરૂ કરો",
+    "ctaExplore": "યોજનાઓ શોધો",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "સક્રિય યોજનાઓ",
+      "successRate": "મેચ દર",
+      "banks": "નોડલ બેંકો"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "પસંદગીઓ",
+    "close": "સેટિંગ્સ બંધ કરો",
+    "appearance": "દેખાવ",
+    "theme": "થીમ",
+    "themeDesc": "તમારી વિઝ્યુઅલ શૈલી પસંદ કરો",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "લાઇટ",
+      "dark": "ડાર્ક",
+      "system": "સિસ્ટમ"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "માહિતી ઘનતા",
+    "densityDesc": "સ્પેસિંગ સ્કેલ ગોઠવો",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "આરામદાયક",
+      "compact": "કોમ્પેક્ટ"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "ઍક્સેસિબિલિટી અને ભાષા",
+    "language": "પસંદગીની ભાષા",
+    "languageDesc": "સહાયક અને સામગ્રી સ્થાનિકીકરણ",
+    "reduceMotion": "એનિમેશન ઘટાડો",
+    "reduceMotionDesc": "બિનજરૂરી એનિમેશન અક્ષમ કરો",
+    "session": "સત્ર",
+    "clearProgress": "મૂલ્યાંકન પ્રગતિ સાફ કરો",
+    "clearProgressConfirm": "શું તમે ખરેખર તમારી મૂલ્યાંકન પ્રગતિ સાફ કરવા માંગો છો? આ પૂર્વવત્ કરી શકાશે નહીં.",
+    "version": "SCHEMORA પ્લેટફોર્મ v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "તમારું રાજ્ય શોધો...",
+    "zoomIn": "ઝૂમ ઇન",
+    "zoomOut": "ઝૂમ આઉટ",
+    "resetView": "દૃશ્ય રીસેટ કરો",
+    "eligibleSchemes": "પાત્ર યોજનાઓ",
+    "channelPartners": "ચેનલ પાર્ટનર્સ",
+    "topSchemes": "ટોચની ઉપલબ્ધ યોજનાઓ",
+    "viewAllIn": "બધું જુઓ:",
+    "noNodeData": "આ રાજ્ય માટે હજુ સુધી કોઈ મજબૂત નોડલ ડેટા મેપ થયો નથી. કવરેજ સક્રિય રીતે વધી રહ્યું છે.",
+    "activeHub": "સક્રિય હબ",
+    "coverageStatus": "કવરેજ સ્થિતિ",
+    "noNodeDataLegend": "કોઈ નોડ ડેટા નથી",
+    "active": "સક્રિય"
   }
 }

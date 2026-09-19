@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "హోమ్",
+    "howItWorks": "ఇది ఎలా పని చేస్తుంది",
+    "exploreSchemes": "పథకాలు అన్వేషించండి",
+    "resources": "వనరులు",
+    "about": "మా గురించి",
+    "startAssessment": "అంచనా ప్రారంభించండి",
+    "openSettings": "సెట్టింగ్‌లు తెరవండి",
+    "menu": "మెనూ"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "మ్యాచ్ చేయండి. ఫండ్ పొందండి. ఎదగండి.",
+    "headlineText": "మీ వ్యాపారం.",
+    "subheadline": "సూక్ష్మ-వ్యవసాయదారులను రాష్ట్ర మరియు కేంద్ర ప్రభుత్వ పథకాలతో తక్షణంగా అనుసంధానించే తెలివైన ఇంజిన్.",
+    "ctaStart": "మీ అంచనా ప్రారంభించండి",
+    "ctaExplore": "పథకాలు అన్వేషించండి",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "సక్రియ పథకాలు",
+      "successRate": "మ్యాచ్ రేట్",
+      "banks": "నోడల్ బ్యాంకులు"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "ప్రాధాన్యతలు",
+    "close": "సెట్టింగ్‌లు మూసివేయండి",
+    "appearance": "రూపం",
+    "theme": "థీమ్",
+    "themeDesc": "మీ విజువల్ శైలిని ఎంచుకోండి",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "లైట్",
+      "dark": "డార్క్",
+      "system": "సిస్టమ్"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "సమాచార సాంద్రత",
+    "densityDesc": "స్పేసింగ్ స్కేల్ సర్దుబాటు చేయండి",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "సౌకర్యవంతం",
+      "compact": "కాంపాక్ట్"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "అందుబాటు & భాష",
+    "language": "ఆదర్శ భాష",
+    "languageDesc": "సహాయకుడు & విషయ స్థానికీకరణ",
+    "reduceMotion": "యానిమేషన్ తగ్గించండి",
+    "reduceMotionDesc": "అనవసర యానిమేషన్‌లను నిలిపివేయండి",
+    "session": "సెషన్",
+    "clearProgress": "అంచనా పురోగతి తొలగించండి",
+    "clearProgressConfirm": "మీరు నిజంగా మీ అంచనా పురోగతిని తొలగించాలనుకుంటున్నారా? ఇది రద్దు చేయలేము.",
+    "version": "SCHEMORA ప్లాట్‌ఫార్మ్ v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "మీ రాష్ట్రాన్ని వెతకండి...",
+    "zoomIn": "జూమ్ ఇన్",
+    "zoomOut": "జూమ్ అవుట్",
+    "resetView": "వీక్షణ రీసెట్ చేయండి",
+    "eligibleSchemes": "అర్హమైన పథకాలు",
+    "channelPartners": "ఛానెల్ భాగస్వాములు",
+    "topSchemes": "అగ్ర అందుబాటు పథకాలు",
+    "viewAllIn": "అన్నీ చూడండి:",
+    "noNodeData": "ఈ రాష్ట్రానికి ఇంకా బలమైన నోడల్ డేటా మ్యాప్ చేయబడలేదు. కవరేజ్ చురుకుగా విస్తరిస్తోంది.",
+    "activeHub": "సక్రియ హబ్",
+    "coverageStatus": "కవరేజ్ స్థితి",
+    "noNodeDataLegend": "నోడ్ డేటా లేదు",
+    "active": "సక్రియం"
   }
 }

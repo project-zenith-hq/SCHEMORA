@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "ہوم",
+    "howItWorks": "یہ کیسے کام کرتا ہے",
+    "exploreSchemes": "اسکیمیں دریافت کریں",
+    "resources": "وسائل",
+    "about": "ہمارے بارے میں",
+    "startAssessment": "تشخیص شروع کریں",
+    "openSettings": "سیٹنگز کھولیں",
+    "menu": "مینو"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "میچ کریں۔ فنڈ حاصل کریں۔ ترقی کریں۔",
+    "headlineText": "آپ کا کاروبار۔",
+    "subheadline": "مائیکرو کاروباری افراد کو ریاستی اور مرکزی حکومت کی اسکیموں سے فوری طور پر جوڑنے والا ذہین انجن۔",
+    "ctaStart": "اپنی تشخیص شروع کریں",
+    "ctaExplore": "اسکیمیں دریافت کریں",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "فعال اسکیمیں",
+      "successRate": "میچ شرح",
+      "banks": "نوڈل بینک"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "ترجیحات",
+    "close": "سیٹنگز بند کریں",
+    "appearance": "ظاہری شکل",
+    "theme": "تھیم",
+    "themeDesc": "اپنی بصری طرز منتخب کریں",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "لائٹ",
+      "dark": "ڈارک",
+      "system": "سسٹم"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "معلومات کی کثافت",
+    "densityDesc": "اسپیسنگ اسکیل ایڈجسٹ کریں",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "آرام دہ",
+      "compact": "مختصر"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "رسائی اور زبان",
+    "language": "ترجیحی زبان",
+    "languageDesc": "معاون اور مواد مقامیت",
+    "reduceMotion": "اینیمیشن کم کریں",
+    "reduceMotionDesc": "غیر ضروری اینیمیشنز غیر فعال کریں",
+    "session": "سیشن",
+    "clearProgress": "تشخیص پیشرفت صاف کریں",
+    "clearProgressConfirm": "کیا آپ واقعی اپنی تشخیص پیشرفت صاف کرنا چاہتے ہیں؟ یہ واپس نہیں ہو سکتا۔",
+    "version": "SCHEMORA پلیٹ فارم v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "اپنی ریاست تلاش کریں...",
+    "zoomIn": "زوم ان",
+    "zoomOut": "زوم آؤٹ",
+    "resetView": "ویو ری سیٹ کریں",
+    "eligibleSchemes": "اہل اسکیمیں",
+    "channelPartners": "چینل پارٹنرز",
+    "topSchemes": "سرکردہ دستیاب اسکیمیں",
+    "viewAllIn": "سب دیکھیں:",
+    "noNodeData": "اس ریاست کے لیے ابھی تک کوئی مضبوط نوڈل ڈیٹا میپ نہیں ہوا۔ کوریج فعال طور پر بڑھ رہی ہے۔",
+    "activeHub": "فعال ہب",
+    "coverageStatus": "کوریج حیثیت",
+    "noNodeDataLegend": "نوڈ ڈیٹا نہیں",
+    "active": "فعال"
   }
 }

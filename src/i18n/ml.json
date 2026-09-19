@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "ഹോം",
+    "howItWorks": "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+    "exploreSchemes": "പദ്ധതികൾ പരിശോധിക്കുക",
+    "resources": "വിഭവങ്ങൾ",
+    "about": "ഞങ്ങളെക്കുറിച്ച്",
+    "startAssessment": "വിലയിരുത്തൽ ആരംഭിക്കുക",
+    "openSettings": "സെറ്റിംഗ്സ് തുറക്കുക",
+    "menu": "മെനു"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "പൊരുത്തപ്പെടുത്തുക. ഫണ്ട് നേടുക. വളരുക.",
+    "headlineText": "നിങ്ങളുടെ ബിസിനസ്.",
+    "subheadline": "സൂക്ഷ്മ-സംരംഭകരെ സംസ്ഥാന-കേന്ദ്ര സർക്കാർ പദ്ധതികളുമായി തൽക്ഷണം ബന്ധിപ്പിക്കുന്ന ബുദ്ധിമാൻ എഞ്ചിൻ.",
+    "ctaStart": "നിങ്ങളുടെ വിലയിരുത്തൽ ആരംഭിക്കുക",
+    "ctaExplore": "പദ്ധതികൾ പരിശോധിക്കുക",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "സജീവ പദ്ധതികൾ",
+      "successRate": "മാച്ച് നിരക്ക്",
+      "banks": "നോഡൽ ബാങ്കുകൾ"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "മുൻഗണനകൾ",
+    "close": "സെറ്റിംഗ്സ് അടയ്ക്കുക",
+    "appearance": "രൂപഭാവം",
+    "theme": "തീം",
+    "themeDesc": "നിങ്ങളുടെ വിഷ്വൽ ശൈലി തിരഞ്ഞെടുക്കുക",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "ലൈറ്റ്",
+      "dark": "ഡാർക്ക്",
+      "system": "സിസ്റ്റം"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "വിവര സാന്ദ്രത",
+    "densityDesc": "സ്‌പേസിംഗ് സ്‌കെയിൽ ക്രമീകരിക്കുക",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "സൌകര്യപ്രദം",
+      "compact": "കോംപാക്ട്"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "പ്രാപ്യത & ഭാഷ",
+    "language": "തിരഞ്ഞെടുത്ത ഭാഷ",
+    "languageDesc": "അസിസ്റ്റന്റ് & ഉള്ളടക്ക പ്രാദേശികവൽക്കരണം",
+    "reduceMotion": "ആനിമേഷൻ കുറയ്ക്കുക",
+    "reduceMotionDesc": "അനാവശ്യ ആനിമേഷനുകൾ നിഷ്ക്രിയമാക്കുക",
+    "session": "സെഷൻ",
+    "clearProgress": "വിലയിരുത്തൽ പുരോഗതി മായ്ക്കുക",
+    "clearProgressConfirm": "നിങ്ങളുടെ വിലയിരുത്തൽ പുരോഗതി മായ്ക്കണമെന്ന് ഉറപ്പാണോ? ഇത് പഴയപടിയാക്കാനാവില്ല.",
+    "version": "SCHEMORA പ്ലാറ്റ്‌ഫോം v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "നിങ്ങളുടെ സംസ്ഥാനം തിരയുക...",
+    "zoomIn": "സൂം ഇൻ",
+    "zoomOut": "സൂം ഔട്ട്",
+    "resetView": "കാഴ്ച പുനഃസജ്ജമാക്കുക",
+    "eligibleSchemes": "യോഗ്യമായ പദ്ധതികൾ",
+    "channelPartners": "ചാനൽ പങ്കാളികൾ",
+    "topSchemes": "മുൻനിര ലഭ്യ പദ്ധതികൾ",
+    "viewAllIn": "എല്ലാം കാണുക:",
+    "noNodeData": "ഈ സംസ്ഥാനത്തിന് ഇതുവരെ ശക്തമായ നോഡൽ ഡാറ്റ മാപ്പ് ചെയ്തിട്ടില്ല. കവറേജ് സജീവമായി വിപുലീകരിക്കുന്നു.",
+    "activeHub": "സജീവ ഹബ്",
+    "coverageStatus": "കവറേജ് സ്ഥിതി",
+    "noNodeDataLegend": "നോഡ് ഡാറ്റ ഇല്ല",
+    "active": "സജീവം"
   }
 }

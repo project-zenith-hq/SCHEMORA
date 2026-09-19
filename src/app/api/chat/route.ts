@@ -64,9 +64,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Scheme context is required' }, { status: 400 });
     }
 
-    let effectivePrompt = language 
-      ? `${SYSTEM_PROMPT_TEMPLATE}\n\nThe user's preferred UI language is ${language}. Please prioritize responding in this language fluently and naturally.`
-      : SYSTEM_PROMPT_TEMPLATE;
+    // Map language codes to full names for clearer AI instruction
+    const LANG_NAMES: Record<string, string> = {
+      'en': 'English', 'hi': 'Hindi', 'bn': 'Bengali', 'te': 'Telugu', 'mr': 'Marathi',
+      'ta': 'Tamil', 'gu': 'Gujarati', 'pa': 'Punjabi', 'kn': 'Kannada', 'ml': 'Malayalam',
+      'or': 'Odia', 'ur': 'Urdu', 'as': 'Assamese', 'bho': 'Bhojpuri', 'ne': 'Nepali',
+    };
+    const langName = language ? (LANG_NAMES[language] || language) : null;
+
+    let effectivePrompt = SYSTEM_PROMPT_TEMPLATE;
+    if (langName && langName !== 'English') {
+      effectivePrompt += `\n\nCRITICAL LANGUAGE INSTRUCTION: The user's selected language is ${langName}. You MUST respond entirely in ${langName}. Write your full response in ${langName} script. Preserve official scheme names (PMEGP, MUDRA, CGTMSE etc.), ₹ amounts, percentages, and URLs in their original form. Understand questions written in ${langName} naturally.`;
+    }
 
     const contextData = `
 CURRENT SCHEME CONTEXT:

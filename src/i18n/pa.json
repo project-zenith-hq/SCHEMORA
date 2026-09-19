@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "ਹੋਮ",
+    "howItWorks": "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ",
+    "exploreSchemes": "ਸਕੀਮਾਂ ਖੋਜੋ",
+    "resources": "ਸਰੋਤ",
+    "about": "ਸਾਡੇ ਬਾਰੇ",
+    "startAssessment": "ਮੁਲਾਂਕਣ ਸ਼ੁਰੂ ਕਰੋ",
+    "openSettings": "ਸੈਟਿੰਗਾਂ ਖੋਲੋ",
+    "menu": "ਮੀਨੂ"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "ਮੈਚ ਕਰੋ। ਫੰਡ ਪ੍ਰਾਪਤ ਕਰੋ। ਵਧੋ।",
+    "headlineText": "ਤੁਹਾਡਾ ਕਾਰੋਬਾਰ।",
+    "subheadline": "ਸੂਖ਼ਮ-ਉੱਦਮੀਆਂ ਨੂੰ ਰਾਜ ਅਤੇ ਕੇਂਦਰ ਸਰਕਾਰ ਦੀਆਂ ਸਕੀਮਾਂ ਨਾਲ ਤੁਰੰਤ ਜੋੜਨ ਵਾਲਾ ਬੁੱਧੀਮਾਨ ਇੰਜਣ।",
+    "ctaStart": "ਆਪਣਾ ਮੁਲਾਂਕਣ ਸ਼ੁਰੂ ਕਰੋ",
+    "ctaExplore": "ਸਕੀਮਾਂ ਖੋਜੋ",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "ਸਰਗਰਮ ਸਕੀਮਾਂ",
+      "successRate": "ਮੈਚ ਦਰ",
+      "banks": "ਨੋਡਲ ਬੈਂਕ"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "ਤਰਜੀਹਾਂ",
+    "close": "ਸੈਟਿੰਗਾਂ ਬੰਦ ਕਰੋ",
+    "appearance": "ਦਿੱਖ",
+    "theme": "ਥੀਮ",
+    "themeDesc": "ਆਪਣੀ ਵਿਜ਼ੁਅਲ ਸ਼ੈਲੀ ਚੁਣੋ",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "ਲਾਈਟ",
+      "dark": "ਡਾਰਕ",
+      "system": "ਸਿਸਟਮ"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "ਜਾਣਕਾਰੀ ਘਣਤਾ",
+    "densityDesc": "ਸਪੇਸਿੰਗ ਸਕੇਲ ਐਡਜਸਟ ਕਰੋ",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "ਆਰਾਮਦਾਇਕ",
+      "compact": "ਕੰਪੈਕਟ"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "ਪਹੁੰਚਯੋਗਤਾ ਅਤੇ ਭਾਸ਼ਾ",
+    "language": "ਤਰਜੀਹੀ ਭਾਸ਼ਾ",
+    "languageDesc": "ਸਹਾਇਕ ਅਤੇ ਸਮੱਗਰੀ ਸਥਾਨਕੀਕਰਨ",
+    "reduceMotion": "ਐਨੀਮੇਸ਼ਨ ਘਟਾਓ",
+    "reduceMotionDesc": "ਗ਼ੈਰ-ਜ਼ਰੂਰੀ ਐਨੀਮੇਸ਼ਨ ਅਯੋਗ ਕਰੋ",
+    "session": "ਸੈਸ਼ਨ",
+    "clearProgress": "ਮੁਲਾਂਕਣ ਪ੍ਰਗਤੀ ਸਾਫ਼ ਕਰੋ",
+    "clearProgressConfirm": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਆਪਣੀ ਮੁਲਾਂਕਣ ਪ੍ਰਗਤੀ ਸਾਫ਼ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਵਾਪਸ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ।",
+    "version": "SCHEMORA ਪਲੇਟਫਾਰਮ v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "ਆਪਣਾ ਰਾਜ ਲੱਭੋ...",
+    "zoomIn": "ਜ਼ੂਮ ਇਨ",
+    "zoomOut": "ਜ਼ੂਮ ਆਊਟ",
+    "resetView": "ਦ੍ਰਿਸ਼ ਰੀਸੈੱਟ ਕਰੋ",
+    "eligibleSchemes": "ਯੋਗ ਸਕੀਮਾਂ",
+    "channelPartners": "ਚੈਨਲ ਪਾਰਟਨਰ",
+    "topSchemes": "ਮੋਹਰੀ ਉਪਲਬਧ ਸਕੀਮਾਂ",
+    "viewAllIn": "ਸਭ ਵੇਖੋ:",
+    "noNodeData": "ਇਸ ਰਾਜ ਲਈ ਅਜੇ ਕੋਈ ਮਜ਼ਬੂਤ ​​ਨੋਡਲ ਡੇਟਾ ਮੈਪ ਨਹੀਂ ਕੀਤਾ ਗਿਆ। ਕਵਰੇਜ ਸਰਗਰਮੀ ਨਾਲ ਫੈਲ ਰਹੀ ਹੈ।",
+    "activeHub": "ਸਰਗਰਮ ਹੱਬ",
+    "coverageStatus": "ਕਵਰੇਜ ਸਥਿਤੀ",
+    "noNodeDataLegend": "ਕੋਈ ਨੋਡ ਡੇਟਾ ਨਹੀਂ",
+    "active": "ਸਰਗਰਮ"
   }
 }

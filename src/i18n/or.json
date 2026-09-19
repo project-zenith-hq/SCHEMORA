@@ -1,66 +1,66 @@
 {
   "nav": {
-    "home": "Home",
-    "howItWorks": "How It Works",
-    "exploreSchemes": "Explore Schemes",
-    "resources": "Resources",
-    "about": "About",
-    "startAssessment": "Start Assessment",
-    "openSettings": "Open Settings",
-    "menu": "Menu"
+    "home": "ହୋମ",
+    "howItWorks": "ଏହା କିପରି କାମ କରେ",
+    "exploreSchemes": "ଯୋଜନା ଅନ୍ୱେଷଣ କରନ୍ତୁ",
+    "resources": "ସମ୍ବଳ",
+    "about": "ଆମ ବିଷୟରେ",
+    "startAssessment": "ମୂଲ୍ୟାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ",
+    "openSettings": "ସେଟିଂସ୍ ଖୋଲନ୍ତୁ",
+    "menu": "ମେନୁ"
   },
   "hero": {
-    "headlineHighlight": "Match. Fund. Grow.",
-    "headlineText": "Your Business.",
-    "subheadline": "The intelligent engine connecting micro-entrepreneurs with state and central government schemes, instantly.",
-    "ctaStart": "Start Your Assessment",
-    "ctaExplore": "Explore Schemes",
+    "headlineHighlight": "ମେଳ କରନ୍ତୁ। ପାଣ୍ଠି ପାଆନ୍ତୁ। ବଢ଼ନ୍ତୁ।",
+    "headlineText": "ଆପଣଙ୍କ ବ୍ୟବସାୟ।",
+    "subheadline": "ସୂକ୍ଷ୍ମ-ଉଦ୍ୟୋଗୀଙ୍କୁ ରାଜ୍ୟ ଓ କେନ୍ଦ୍ର ସରକାରୀ ଯୋଜନା ସହ ତତ୍‌କ୍ଷଣ ସଂଯୋଗ କରୁଥିବା ବୁଦ୍ଧିମାନ ଇଞ୍ଜିନ।",
+    "ctaStart": "ଆପଣଙ୍କ ମୂଲ୍ୟାଙ୍କନ ଆରମ୍ଭ କରନ୍ତୁ",
+    "ctaExplore": "ଯୋଜନା ଅନ୍ୱେଷଣ କରନ୍ତୁ",
     "engineStats": {
-      "schemes": "Active Schemes",
-      "successRate": "Match Rate",
-      "banks": "Nodal Banks"
+      "schemes": "ସକ୍ରିୟ ଯୋଜନା",
+      "successRate": "ମେଳ ହାର",
+      "banks": "ନୋଡାଲ ବ୍ୟାଙ୍କ"
     }
   },
   "settings": {
-    "title": "Preferences",
-    "close": "Close Settings",
-    "appearance": "Appearance",
-    "theme": "Theme",
-    "themeDesc": "Choose your visual style",
+    "title": "ପସନ୍ଦ",
+    "close": "ସେଟିଂସ୍ ବନ୍ଦ କରନ୍ତୁ",
+    "appearance": "ରୂପ",
+    "theme": "ଥିମ",
+    "themeDesc": "ଆପଣଙ୍କ ଭିଜୁଆଲ ଶୈଳୀ ବାଛନ୍ତୁ",
     "themeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
+      "light": "ଲାଇଟ",
+      "dark": "ଡାର୍କ",
+      "system": "ସିଷ୍ଟମ"
     },
-    "density": "Information Density",
-    "densityDesc": "Adjust spacing scale",
+    "density": "ସୂଚନା ସାନ୍ଦ୍ରତା",
+    "densityDesc": "ସ୍ପେସିଂ ସ୍କେଲ ସମନ୍ୱୟ କରନ୍ତୁ",
     "densityOptions": {
-      "comfortable": "Comfortable",
-      "compact": "Compact"
+      "comfortable": "ଆରାମଦାୟକ",
+      "compact": "କମ୍ପାକ୍ଟ"
     },
-    "accessibility": "Accessibility & Locale",
-    "language": "Preferred Language",
-    "languageDesc": "Assistant & content localization",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDesc": "Disable non-essential animations",
-    "session": "Session",
-    "clearProgress": "Clear Assessment Progress",
-    "clearProgressConfirm": "Are you sure you want to clear your assessment progress? This cannot be undone.",
-    "version": "SCHEMORA Platform v0.1.0-beta"
+    "accessibility": "ପ୍ରାପ୍ୟତା ଓ ଭାଷା",
+    "language": "ପସନ୍ଦର ଭାଷା",
+    "languageDesc": "ସହାୟକ ଓ ବିଷୟବସ୍ତୁ ସ୍ଥାନୀୟକରଣ",
+    "reduceMotion": "ଆନିମେସନ କମାନ୍ତୁ",
+    "reduceMotionDesc": "ଅନାବଶ୍ୟକ ଆନିମେସନ ନିଷ୍କ୍ରିୟ କରନ୍ତୁ",
+    "session": "ସେସନ",
+    "clearProgress": "ମୂଲ୍ୟାଙ୍କନ ପ୍ରଗତି ସଫା କରନ୍ତୁ",
+    "clearProgressConfirm": "ଆପଣ ସତରେ ନିଜ ମୂଲ୍ୟାଙ୍କନ ପ୍ରଗତି ସଫା କରିବାକୁ ଚାହୁଁଛନ୍ତି? ଏହା ଫେରାଯାଇ ପାରିବ ନାହିଁ।",
+    "version": "SCHEMORA ପ୍ଲାଟଫର୍ମ v0.1.0-beta"
   },
   "map": {
-    "searchPlaceholder": "Search your state...",
-    "zoomIn": "Zoom In",
-    "zoomOut": "Zoom Out",
-    "resetView": "Reset View",
-    "eligibleSchemes": "Eligible Schemes",
-    "channelPartners": "Channel Partners",
-    "topSchemes": "Top Available Schemes",
-    "viewAllIn": "View All in",
-    "noNodeData": "No robust nodal data mapped for this state yet. Coverage is actively expanding.",
-    "activeHub": "Active Hub",
-    "coverageStatus": "Coverage Status",
-    "noNodeDataLegend": "No Node Data",
-    "active": "Active"
+    "searchPlaceholder": "ଆପଣଙ୍କ ରାଜ୍ୟ ଖୋଜନ୍ତୁ...",
+    "zoomIn": "ଜୁମ ଇନ",
+    "zoomOut": "ଜୁମ ଆଉଟ",
+    "resetView": "ଦୃଶ୍ୟ ରିସେଟ କରନ୍ତୁ",
+    "eligibleSchemes": "ଯୋଗ୍ୟ ଯୋଜନା",
+    "channelPartners": "ଚ୍ୟାନେଲ ପାର୍ଟନର",
+    "topSchemes": "ପ୍ରମୁଖ ଉପಲବ୍ଧ ଯୋଜନା",
+    "viewAllIn": "ସବୁ ଦେଖନ୍ତୁ:",
+    "noNodeData": "ଏହି ରାଜ୍ୟ ପାଇଁ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ଦୃଢ ନୋଡାଲ ଡାଟା ମ୍ୟାପ ହୋଇନାହିଁ। କଭରେଜ ସକ୍ରିୟ ଭାବେ ବିସ୍ତାର ହେଉଛି।",
+    "activeHub": "ସକ୍ରିୟ ହବ",
+    "coverageStatus": "କଭରେଜ ସ୍ଥିତି",
+    "noNodeDataLegend": "ନୋଡ ଡାଟା ନାହିଁ",
+    "active": "ସକ୍ରିୟ"
   }
 }

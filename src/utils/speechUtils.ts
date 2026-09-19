@@ -37,12 +37,22 @@ export function stopSpeech() {
   isManualStopRef.current = false;
 }
 
-// Map site language codes to BCP-47 codes
+// Map site language codes to BCP-47 codes for SpeechSynthesis voice selection
 const langMap: Record<string, string> = {
+  'en': 'en-IN',
   'hi': 'hi-IN',
   'bn': 'bn-IN',
+  'te': 'te-IN',
+  'mr': 'mr-IN',
   'ta': 'ta-IN',
-  'en': 'en-IN',
+  'gu': 'gu-IN',
+  'pa': 'pa-IN',
+  'kn': 'kn-IN',
+  'ml': 'ml-IN',
+  'or': 'or-IN',
+  'ur': 'ur-IN',
+  'as': 'as-IN',
+  'ne': 'ne-IN',
 };
 
 /**
@@ -81,6 +91,7 @@ export async function playSpeech(
     
     // Attempt to find best voice matching language
     const voices = window.speechSynthesis.getVoices();
+    let voiceFound = false;
     if (voices.length > 0) {
       const langVoices = voices.filter(v => v.lang.startsWith(bcp47Lang) || v.lang.startsWith(bcp47Lang.split('-')[0]));
       let selectedVoice = langVoices[0];
@@ -99,10 +110,15 @@ export async function playSpeech(
       
       if (selectedVoice) {
         utterance.voice = selectedVoice;
-      } else if (voices.length > 0) {
-        // Fallback to any voice if no language match
-        utterance.voice = voices.find(v => preferFemale ? v.name.toLowerCase().includes('female') : true) || voices[0];
+        voiceFound = true;
       }
+    }
+
+    // If we wanted a non-English voice but none was found, report it
+    if (!voiceFound && language !== 'en') {
+      if (onError) onError("Unsupported language: voice unavailable for this language on your device.");
+      currentPlayingId = null;
+      return;
     }
 
     utterance.onend = () => {
