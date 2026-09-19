@@ -27,7 +27,15 @@ export default function ResultsPage() {
   }
 
   // Sort results by best match
-  const sortedResults = [...matchResults].sort((a, b) => b.matchScore - a.matchScore);
+  const sortedResults = [...matchResults].sort((a, b) => {
+    if (a.eligibility.isEligible === b.eligibility.isEligible) {
+      if (a.matchScore === null && b.matchScore === null) return 0;
+      if (a.matchScore === null) return 1;
+      if (b.matchScore === null) return -1;
+      return b.matchScore - a.matchScore;
+    }
+    return a.eligibility.isEligible ? -1 : 1;
+  });
 
   return (
     <div className={styles.page}>
@@ -44,8 +52,16 @@ export default function ResultsPage() {
             <CardHeader>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div className={styles.matchScore}>
-                  {result.matchScore}% 
-                  <span className={styles.matchLabel}>Match</span>
+                  {result.matchScore !== null ? (
+                    <>
+                      {result.matchScore}% 
+                      <span className={styles.matchLabel}>Match</span>
+                    </>
+                  ) : (
+                    <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                      Match: Unavailable
+                    </span>
+                  )}
                 </div>
                 <Badge variant={result.eligibility.isEligible ? 'success' : 'error'}>
                   {result.eligibility.isEligible ? 'ELIGIBLE' : 'NOT ELIGIBLE'}

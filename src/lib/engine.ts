@@ -248,7 +248,6 @@ export function computeAIMatch(
   scheme: Scheme,
   eligibility: EligibilityEvaluation
 ): SchemeMatchResult {
-  let score = 50; // Base score
   let dataNotVerified = false;
   
   if (scheme.needsVerification) {
@@ -260,7 +259,7 @@ export function computeAIMatch(
     
     return {
       scheme,
-      matchScore: score,
+      matchScore: null,
       eligibility,
       personalizedExplanation,
       keyBenefitHighlight: "Requires Official Verification",
@@ -269,40 +268,61 @@ export function computeAIMatch(
     };
   }
 
-  // 1. Eligibility Weight (0 or +25)
+  // Calculate deterministic score based on available evidence
+  let score = 0;
+  let maxPossibleScore = 0;
+
+  // 1. Core Eligibility (Heavy weight)
+  maxPossibleScore += 50;
   if (eligibility.isEligible) {
-    score += 25;
+    score += 50;
+  }
+
+  // 2. Sector Affinity
+  if (scheme.rules.allowedIndustries && scheme.rules.allowedIndustries.length > 0) {
+    maxPossibleScore += 15;
+    if (scheme.rules.allowedIndustries.includes(profile.industry)) {
+      score += 15;
+    }
+  }
+
+  // 3. Subsidy / Benefit Value
+  if (scheme.subsidyRules || eligibility.calculatedSubsidyPercent) {
+    maxPossibleScore += 15;
+    if (eligibility.calculatedSubsidyPercent && eligibility.calculatedSubsidyPercent > 0) {
+      score += 15;
+    }
+  }
+
+  // 4. Funding Band Fit
+  if (scheme.minFundingAmount && scheme.maxFundingAmount) {
+    maxPossibleScore += 10;
+    if (profile.requiredFunding >= scheme.minFundingAmount && profile.requiredFunding <= scheme.maxFundingAmount) {
+      score += 10;
+    }
+  }
+
+  // 5. Margin adequacy bonus
+  if (eligibility.requiredOwnContribution) {
+    maxPossibleScore += 10;
+    if (profile.personalContribution >= eligibility.requiredOwnContribution) {
+      score += 10;
+    }
+  }
+
+  // Calculate proportional match score out of 100
+  let finalPercentage = maxPossibleScore > 0 ? Math.round((score / maxPossibleScore) * 100) : 0;
+
+  // Cap the score based on strict eligibility
+  if (!eligibility.isEligible) {
+    // If they failed mandatory criteria, it's not a good match regardless of other factors
+    finalPercentage = Math.min(finalPercentage, 35);
   } else {
-    // If hard rules failed, penalize heavily
-    score = Math.max(20, score - (eligibility.failedRules.length * 15));
+    // If they are eligible, it's at least a decent match
+    finalPercentage = Math.max(finalPercentage, 60);
   }
 
-  // 2. Sector Affinity (+10)
-  if (scheme.rules.allowedIndustries?.includes(profile.industry)) {
-    score += 10;
-  }
-
-  // 3. Subsidy / Benefit Value (+10)
-  if (eligibility.calculatedSubsidyPercent && eligibility.calculatedSubsidyPercent > 0) {
-    score += Math.min(10, Math.round(eligibility.calculatedSubsidyPercent / 3.5));
-  }
-
-  // 4. Funding Band Fit (+5)
-  if (
-    scheme.minFundingAmount && scheme.maxFundingAmount &&
-    profile.requiredFunding >= scheme.minFundingAmount &&
-    profile.requiredFunding <= scheme.maxFundingAmount
-  ) {
-    score += 5;
-  }
-
-  // 5. Margin adequacy bonus (+5)
-  if (eligibility.requiredOwnContribution && profile.personalContribution >= eligibility.requiredOwnContribution) {
-    score += 5;
-  }
-
-  // Clamp score between 25% and 98% (never claim 100% certainty before official bank audit)
-  const finalScore = Math.min(98, Math.max(25, score));
+  const finalScore = finalPercentage;
 
   // Dynamic profile-grounded explanation
   let personalizedExplanation = '';
@@ -381,6 +401,11 @@ export function runSchemoraMatching(profile: UserProfile): SchemeMatchResult[] {
     
     if (a.eligibility.isEligible && !b.eligibility.isEligible) return -1;
     if (!a.eligibility.isEligible && b.eligibility.isEligible) return 1;
+    
+    if (a.matchScore === null && b.matchScore === null) return 0;
+    if (a.matchScore === null) return 1;
+    if (b.matchScore === null) return -1;
+    
     return b.matchScore - a.matchScore;
   });
 }

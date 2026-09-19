@@ -167,7 +167,7 @@ export interface EligibilityEvaluation {
 
 export interface SchemeMatchResult {
   scheme: Scheme;
-  matchScore: number; // 0 to 100
+  matchScore: number | null; // 0 to 100 or null if data is insufficient
   eligibility: EligibilityEvaluation;
   personalizedExplanation: string;
   keyBenefitHighlight: string;
