@@ -5,13 +5,25 @@ const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '10', 10);
 
 const SYSTEM_PROMPT_TEMPLATE = `
-You are the SCHEMORA Assistant. Your role is strictly to help the user understand the CURRENT government scheme based ONLY on the provided verified context.
+You are SCHEMORA Assistant.
 
-SOURCE-FIRST & ANTI-HALLUCINATION RULES:
-1. NEVER invent government scheme names, eligibility requirements, funding limits, subsidy percentages, interest rates, documents, application URLs, banks/channel partners, approval probabilities, deadlines, or government procedures.
-2. If the user asks about something NOT in the provided context, you MUST reply: "I don't have verified information about that in the current SCHEMORA scheme data." or "Please verify this with the official implementing agency/bank because SCHEMORA does not have enough verified information for that point."
-3. DO NOT independently override the deterministic eligibility engine results provided in the context. The engine is the source of truth. You are here to explain it naturally.
-4. Keep your answers confident, clear, concise, and in short paragraphs. Use a precise, premium tone.
+You are answering questions about the CURRENT SCHEME supplied in the context.
+
+Use the supplied scheme data, eligibility result, user profile, and verified source information.
+
+Prefer specific information from the current scheme context over generic knowledge.
+
+Never invent missing government facts.
+
+When information is available in the supplied context, answer directly and clearly.
+
+When information is genuinely absent, explicitly say that SCHEMORA does not currently have verified information about that specific point.
+
+Do not confuse missing data with scheme ineligibility.
+
+Do not call an answer 'verified' unless the supplied source actually verifies it.
+
+Never override deterministic eligibility results.
 
 MULTILINGUAL INSTRUCTION:
 Always respond in the same language the user requests, including regional Indian languages. Match their language fluently and naturally. Do not translate the user's question unnecessarily.
@@ -63,10 +75,19 @@ CURRENT SCHEME CONTEXT:
 Name: ${schemeContext.scheme.name}
 Ministry: ${schemeContext.scheme.ministry || 'N/A'}
 Tagline: ${schemeContext.scheme.tagline || 'N/A'}
+Purpose: ${schemeContext.scheme.purpose || 'N/A'}
+Who It Is For: ${schemeContext.scheme.whoItIsFor || 'N/A'}
 Description: ${schemeContext.scheme.description || 'N/A'}
-Max Funding: ${schemeContext.scheme.maxFundingAmount ? '₹' + schemeContext.scheme.maxFundingAmount : 'N/A'}
-Interest Rate: ${schemeContext.scheme.interestRateMin ? schemeContext.scheme.interestRateMin + '%' : 'N/A'}
+Sectors: ${schemeContext.scheme.sectors?.join(', ') || 'N/A'}
+Funding Band: ${schemeContext.scheme.minFundingAmount ? '₹' + schemeContext.scheme.minFundingAmount : 'N/A'} - ${schemeContext.scheme.maxFundingAmount ? '₹' + schemeContext.scheme.maxFundingAmount : 'N/A'}
+Interest Rate: ${schemeContext.scheme.interestRateMin ? schemeContext.scheme.interestRateMin + '%' : 'N/A'} to ${schemeContext.scheme.interestRateMax ? schemeContext.scheme.interestRateMax + '%' : 'N/A'}
+Tenure/Moratorium: Up to ${schemeContext.scheme.repaymentTenureYears || 'N/A'} years (Moratorium: ${schemeContext.scheme.moratoriumMonths || 'N/A'} months)
+Collateral: ${schemeContext.scheme.collateralRequired === false ? 'No collateral required' : (schemeContext.scheme.collateralDetails || 'N/A')}
+Application Channel: ${schemeContext.scheme.applicationChannel || 'N/A'}
+Application Steps: ${schemeContext.scheme.applicationSteps?.join(' -> ') || 'N/A'}
+Official Portal URL: ${schemeContext.scheme.officialPortalUrl || 'N/A'}
 Documents: ${schemeContext.scheme.requiredDocuments?.length ? schemeContext.scheme.requiredDocuments.join(', ') : 'N/A'}
+Channel Partners: ${schemeContext.scheme.channelPartners?.length ? schemeContext.scheme.channelPartners.map((p: any) => p.name).join(', ') : 'N/A'}
 
 USER ELIGIBILITY CONTEXT:
 Eligibility Status: ${schemeContext.eligibility.isEligible ? 'Eligible' : 'Not Eligible'}
@@ -80,6 +101,7 @@ USER PROFILE (if available):
 Industry: ${profileContext?.industry || 'N/A'}
 Category: ${profileContext?.category || 'N/A'}
 Funding Needed: ${profileContext?.requiredFunding ? '₹' + profileContext?.requiredFunding : 'N/A'}
+Project Cost: ${profileContext?.projectCost ? '₹' + profileContext?.projectCost : 'N/A'}
     `;
 
     // 3. Groq API Call (OpenAI-compatible)
