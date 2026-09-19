@@ -25,7 +25,7 @@ const geoUrl = "/india-states.json";
 
 export default function IndiaMap() {
   const [tooltip, setTooltip] = useState<{
-    content: { name: string; schemes: number } | null;
+    content: { name: string; centralCount: number; stateCount: number } | null;
     x: number;
     y: number;
   }>({ content: null, x: 0, y: 0 });
@@ -41,10 +41,15 @@ export default function IndiaMap() {
 
   const { t } = useTranslation();
 
-  const centralSchemes = useMemo(() => SCHEMES_DATABASE.filter(s => !s.states || s.states.includes('all')), []);
+  const centralSchemes = useMemo(() => SCHEMES_DATABASE.filter(s => 
+    s.issuing_authority_level === 'central' || (!s.issuing_authority_level && (!s.states || s.states.includes('all')))
+  ), []);
   
   const getStateData = (stateName: string) => {
-    const stateSchemes = SCHEMES_DATABASE.filter(s => s.states && s.states.includes(stateName) && !s.states.includes('all'));
+    const stateSchemes = SCHEMES_DATABASE.filter(s => 
+      (s.issuing_authority_level === 'state' && s.states?.includes(stateName)) ||
+      (!s.issuing_authority_level && s.states?.includes(stateName) && !s.states.includes('all'))
+    );
     const total = centralSchemes.length + stateSchemes.length;
     return {
       total,
@@ -161,10 +166,11 @@ export default function IndiaMap() {
                   const isHovered = hoveredState === stateName;
                   const isActive = activeStateDetails === stateName;
                   
+                  const baseCount = data.centralSchemes.length;
                   let fillClass = 'var(--bg-tertiary)';
-                  if (data.total >= 6) fillClass = 'var(--accent)';
-                  else if (data.total >= 3) fillClass = 'rgba(245, 184, 0, 0.7)';
-                  else if (data.total >= 1) fillClass = 'rgba(245, 184, 0, 0.4)';
+                  if (data.total >= baseCount + 10) fillClass = 'var(--accent)';
+                  else if (data.total >= baseCount + 5) fillClass = 'rgba(245, 184, 0, 0.8)';
+                  else if (data.total > baseCount) fillClass = 'rgba(245, 184, 0, 0.4)';
 
                   const fillColor = isActive 
                     ? "var(--accent-hover)" 
@@ -177,7 +183,7 @@ export default function IndiaMap() {
                       onMouseEnter={(e) => {
                         setHoveredState(stateName);
                         setTooltip({
-                          content: { name: stateName, schemes: data.total },
+                          content: { name: stateName, centralCount: data.centralSchemes.length, stateCount: data.stateSchemes.length },
                           x: e.clientX,
                           y: e.clientY,
                         });
@@ -245,7 +251,7 @@ export default function IndiaMap() {
               </div>
 
               <div className={styles.panelSection}>
-                <h4 className={styles.panelSectionTitle}>Central Government Schemes</h4>
+                <h4 className={styles.panelSectionTitle}>Central Government Schemes ({getStateData(activeStateDetails).centralSchemes.length})</h4>
                 <div className={styles.schemeList}>
                   {getStateData(activeStateDetails).centralSchemes.map(s => (
                     <div key={s.id} className={styles.schemeCard} onClick={() => setSelectedScheme(s)}>
@@ -259,7 +265,9 @@ export default function IndiaMap() {
               </div>
 
               <div className={styles.panelSection}>
-                <h4 className={styles.panelSectionTitle}>{activeStateDetails} State Schemes</h4>
+                <h4 className={styles.panelSectionTitle}>
+                  {activeStateDetails} State Schemes ({getStateData(activeStateDetails).stateSchemes.length > 0 ? getStateData(activeStateDetails).stateSchemes.length : 'Not yet compiled'})
+                </h4>
                 {getStateData(activeStateDetails).stateSchemes.length > 0 ? (
                   <div className={styles.schemeList}>
                     {getStateData(activeStateDetails).stateSchemes.map(s => (
@@ -293,7 +301,11 @@ export default function IndiaMap() {
             </div>
             <div className={styles.tooltipRow}>
               <span className={styles.tooltipLabel}>{t('map.eligibleSchemes') || 'Schemes'}</span>
-              <span className={styles.tooltipValue}>{tooltip.content.schemes}</span>
+              <span className={styles.tooltipValue}>
+                {tooltip.content.stateCount > 0 
+                  ? `${tooltip.content.centralCount} Central + ${tooltip.content.stateCount} State` 
+                  : `${tooltip.content.centralCount} Central`}
+              </span>
             </div>
           </>
         )}
@@ -303,19 +315,22 @@ export default function IndiaMap() {
         <div className={styles.legendTitle}>{t('map.coverageStatus') || 'Coverage'}</div>
         <div className={styles.legendItem}>
           <div className={styles.legendColor} style={{ backgroundColor: 'var(--accent)' }} />
-          <span>6+ Schemes</span>
+          <span>{centralSchemes.length + 10}+ Schemes</span>
         </div>
         <div className={styles.legendItem}>
-          <div className={styles.legendColor} style={{ backgroundColor: 'rgba(245, 184, 0, 0.7)' }} />
-          <span>3-5 Schemes</span>
+          <div className={styles.legendColor} style={{ backgroundColor: 'rgba(245, 184, 0, 0.8)' }} />
+          <span>{centralSchemes.length + 5}-{centralSchemes.length + 9} Schemes</span>
         </div>
         <div className={styles.legendItem}>
           <div className={styles.legendColor} style={{ backgroundColor: 'rgba(245, 184, 0, 0.4)' }} />
-          <span>1-2 Schemes</span>
+          <span>{centralSchemes.length + 1}-{centralSchemes.length + 4} Schemes</span>
         </div>
         <div className={styles.legendItem}>
           <div className={styles.legendColor} style={{ backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border-strong)' }} />
-          <span>No data</span>
+          <span>{centralSchemes.length} (Central only)</span>
+        </div>
+        <div style={{ marginTop: '8px', fontSize: '10px', color: 'var(--text-secondary)', lineHeight: '1.2' }}>
+          * State-specific scheme data is being progressively added.
         </div>
       </div>
 

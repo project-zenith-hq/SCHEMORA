@@ -148,6 +148,7 @@ export interface Scheme {
   officialPortalUrl?: string;
   isDemoData?: boolean;
   states?: string[];
+  issuing_authority_level?: 'central' | 'state';
   sourceLastUpdated?: string;
   dataConfidence?: number;
   needsVerification?: boolean;
