@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { SchemeMatchResult } from '@/types/assessment';
 import { SchemeDetailModal } from './SchemeDetailModal';
+import { GapRoadmap } from './components/GapRoadmap';
 import styles from './results.module.css';
 
 export default function ResultsPage() {
@@ -57,6 +58,9 @@ export default function ResultsPage() {
                 {result.keyBenefitHighlight}
               </div>
               <p className={styles.schemeDesc}>{result.scheme.description}</p>
+              {!result.eligibility.isEligible && (
+                <GapRoadmap result={result} profile={profile} />
+              )}
             </CardContent>
             <CardFooter>
               <Button 
