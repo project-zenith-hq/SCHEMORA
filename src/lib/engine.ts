@@ -369,9 +369,40 @@ export function computeAIMatch(
     keyBenefitHighlight = `Up to 44% composite subsidy on agro-processing and cold-chain infrastructure`;
     recommendedNextStep = `Enroll in the 45-day MANAGE residential training program to unlock credit linkage.`;
   } else {
-    personalizedExplanation = `Matches your business stage and credit requirements based on standard MSME lending directives.`;
-    keyBenefitHighlight = `Competitive institutional lending terms`;
-    recommendedNextStep = `Review required documentation and consult the designated channel partner.`;
+    const reasons: string[] = [];
+    if (eligibility.isEligible) {
+      reasons.push('You satisfy the mandatory eligibility criteria for this scheme.');
+    } else {
+      reasons.push(`You do not currently meet all criteria. Failed rules: ${eligibility.failedRules.join(', ')}.`);
+    }
+
+    if (scheme.purpose) {
+      reasons.push(`Designed for: ${scheme.purpose}`);
+    }
+
+    personalizedExplanation = reasons.join(' ') || 'Information not available in the current SCHEMORA dataset.';
+
+    const benefits: string[] = [];
+    if (eligibility.calculatedSubsidyPercent && eligibility.calculatedSubsidyPercent > 0) {
+      benefits.push(`Up to ${eligibility.calculatedSubsidyPercent}% Subsidy`);
+    } else if (scheme.subsidyRules) {
+      benefits.push(`Subsidy support available`);
+    }
+    
+    if (scheme.maxFundingAmount) {
+      benefits.push(`Up to ${formatINR(scheme.maxFundingAmount)}`);
+    }
+    if (scheme.interestRateMin) {
+      benefits.push(`Rates from ${scheme.interestRateMin}%`);
+    }
+    
+    keyBenefitHighlight = benefits.length > 0 
+      ? benefits.join(' | ') 
+      : (scheme.tagline || 'Information not available in the current SCHEMORA dataset.');
+
+    recommendedNextStep = scheme.applicationChannel 
+      ? `Apply via ${scheme.applicationChannel}` 
+      : 'Consult official guidelines or channel partner. Information not available in the current SCHEMORA dataset.';
   }
 
   return {
