@@ -30,6 +30,12 @@ export function SchemeDetailModal({ result, onClose }: Props) {
   const [chatInput, setChatInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
+  const [aiDocGuidance, setAiDocGuidance] = useState<string | null>(null);
+  const [isAiDocLoading, setIsAiDocLoading] = useState(false);
+
+  const [aiAppGuidance, setAiAppGuidance] = useState<string | null>(null);
+  const [isAiAppLoading, setIsAiAppLoading] = useState(false);
+  
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,6 +43,44 @@ export function SchemeDetailModal({ result, onClose }: Props) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatMessages, isLoading]);
+
+  useEffect(() => {
+    if (!scheme.requiredDocuments || scheme.requiredDocuments.length === 0) {
+      setIsAiDocLoading(true);
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: "What documents are generally required for this scheme? Give a concise list. Start your response EXACTLY with 'SCHEMORA guidance: ' and explain that the exact checklist should be confirmed with the implementing authority.",
+          profileContext: profile,
+          schemeContext: result,
+          language
+        })
+      })
+      .then(res => res.json())
+      .then(data => setAiDocGuidance(data.reply))
+      .catch(() => setAiDocGuidance("Could not generate document guidance. Please ask SCHEMORA below."))
+      .finally(() => setIsAiDocLoading(false));
+    }
+
+    if (!scheme.channelPartners?.length && !scheme.applicationChannel && !scheme.officialPortalUrl) {
+      setIsAiAppLoading(true);
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: "How do I apply for this scheme? Where should I go? Give concise general guidance. Start your response EXACTLY with 'SCHEMORA guidance: '.",
+          profileContext: profile,
+          schemeContext: result,
+          language
+        })
+      })
+      .then(res => res.json())
+      .then(data => setAiAppGuidance(data.reply))
+      .catch(() => setAiAppGuidance("Could not generate application guidance. Please ask SCHEMORA below."))
+      .finally(() => setIsAiAppLoading(false));
+    }
+  }, [scheme, profile, result, language]);
 
   const SUGGESTED_QUESTIONS = [
     "Am I eligible for this scheme?",
@@ -96,30 +140,80 @@ export function SchemeDetailModal({ result, onClose }: Props) {
             <h2 style={{ fontSize: '2rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               {scheme.name}
             </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>{scheme.tagline}</p>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', marginBottom: '1.5rem' }}>{scheme.tagline}</p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {scheme.description && (
+                <div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem' }}>Overview</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.5 }}>{scheme.description}</p>
+                </div>
+              )}
+              {scheme.purpose && (
+                <div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem' }}>Purpose</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.5 }}>{scheme.purpose}</p>
+                </div>
+              )}
+              {scheme.whoItIsFor && (
+                <div>
+                  <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.25rem' }}>Target Audience</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.5 }}>{scheme.whoItIsFor}</p>
+                </div>
+              )}
+              {scheme.officialPortalUrl && (
+                <div style={{ marginTop: '0.5rem' }}>
+                  <a href={scheme.officialPortalUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500 }}>
+                    Official Source / Apply Portal
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '2.5rem', padding: '1.25rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-subtle)' }}>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Why this matches you</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.5, marginBottom: '1rem' }}>
+              {result.personalizedExplanation}
+            </p>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <Badge variant="success">{result.keyBenefitHighlight}</Badge>
+              <Badge variant="warning">{result.recommendedNextStep}</Badge>
+            </div>
           </div>
 
           <h3 className={styles.sectionTitle}>Eligibility Check</h3>
-          <ul className={styles.eligibilityList}>
-            {eligibility.matchedRules.map((rule, idx) => (
-              <li key={`pass-${idx}`} className={styles.eligibilityItem}>
-                <span className={styles.checkIcon}>✓</span>
-                <span>{rule}</span>
-              </li>
-            ))}
-            {eligibility.failedRules.map((rule, idx) => (
-              <li key={`fail-${idx}`} className={styles.eligibilityItem}>
-                <span className={styles.crossIcon}>✕</span>
-                <span>{rule}</span>
-              </li>
-            ))}
-            {eligibility.pendingCheckRules.map((rule, idx) => (
-              <li key={`warn-${idx}`} className={styles.eligibilityItem}>
-                <span className={styles.warnIcon}>!</span>
-                <span>{rule} (Additional verification required)</span>
-              </li>
-            ))}
-          </ul>
+          {eligibility.matchedRules.length === 0 && eligibility.failedRules.length === 0 && eligibility.pendingCheckRules.length === 0 ? (
+            <div style={{ padding: '1rem', color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
+              Detailed eligibility breakdown is not available for your current profile. The scheme may have open eligibility or require manual verification. Ask SCHEMORA for more details.
+            </div>
+          ) : (
+            <ul className={styles.eligibilityList}>
+              {eligibility.matchedRules.map((rule, idx) => (
+                <li key={`pass-${idx}`} className={styles.eligibilityItem}>
+                  <span className={styles.checkIcon}>✓</span>
+                  <span>{rule}</span>
+                </li>
+              ))}
+              {eligibility.failedRules.map((rule, idx) => (
+                <li key={`fail-${idx}`} className={styles.eligibilityItem}>
+                  <span className={styles.crossIcon}>✕</span>
+                  <span>{rule}</span>
+                </li>
+              ))}
+              {eligibility.pendingCheckRules.map((rule, idx) => (
+                <li key={`warn-${idx}`} className={styles.eligibilityItem}>
+                  <span className={styles.warnIcon}>!</span>
+                  <span>{rule} (Additional verification required)</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <h3 className={styles.sectionTitle}>Financial Terms & Calculator</h3>
           <div className={styles.calcBox}>
@@ -161,31 +255,80 @@ export function SchemeDetailModal({ result, onClose }: Props) {
           </div>
 
           <h3 className={styles.sectionTitle}>Where to Apply</h3>
-          <div style={{ border: '1px solid var(--border-medium)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
-            {scheme.channelPartners && scheme.channelPartners.length > 0 ? (
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-                <thead>
-                  <tr style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-medium)' }}>
-                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Partner</th>
-                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Type</th>
-                    <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Distance</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {scheme.channelPartners.map((partner) => (
-                    <tr key={partner.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                      <td style={{ padding: '0.75rem 1rem' }}>{partner.name}</td>
-                      <td style={{ padding: '0.75rem 1rem', color: 'var(--text-muted)' }}>{partner.type}</td>
-                      <td style={{ padding: '0.75rem 1rem' }}>{partner.distanceKm} km</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', backgroundColor: 'var(--bg-secondary)' }}>
-                Verified channel partner data is not currently available in SCHEMORA for this scheme.
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {scheme.applicationChannel && (
+              <div>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Application Channel</h4>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{scheme.applicationChannel}</p>
               </div>
             )}
+            
+            {scheme.applicationSteps && scheme.applicationSteps.length > 0 && (
+              <div>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Application Steps</h4>
+                <ol style={{ paddingLeft: '1.25rem', margin: 0, fontSize: '0.9rem', color: 'var(--text-primary)', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                  {scheme.applicationSteps.map((step, idx) => (
+                    <li key={idx}>{step}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            {scheme.officialPortalUrl && (
+              <div>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>Official Portal</h4>
+                <a href={scheme.officialPortalUrl} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent)', textDecoration: 'none', fontWeight: 500, fontSize: '0.9rem' }}>
+                  Visit Official Website
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+            )}
+
+            <div style={{ border: '1px solid var(--border-medium)', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+              {scheme.channelPartners && scheme.channelPartners.length > 0 ? (
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-medium)' }}>
+                      <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Partner</th>
+                      <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Type</th>
+                      <th style={{ padding: '0.75rem 1rem', textAlign: 'left', fontWeight: 500 }}>Distance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {scheme.channelPartners.map((partner) => (
+                      <tr key={partner.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                        <td style={{ padding: '0.75rem 1rem' }}>{partner.name}</td>
+                        <td style={{ padding: '0.75rem 1rem', color: 'var(--text-muted)' }}>{partner.type}</td>
+                        <td style={{ padding: '0.75rem 1rem' }}>{partner.distanceKm} km</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <div style={{ padding: '1.5rem', color: 'var(--text-secondary)', backgroundColor: 'var(--bg-secondary)', fontSize: '0.9rem' }}>
+                  {isAiAppLoading ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)' }}>
+                      <span className={styles.typingIndicator}>...</span>
+                      Generating guidance...
+                    </div>
+                  ) : aiAppGuidance ? (
+                    <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.5 }}>
+                      <Badge variant="warning" style={{ marginBottom: '0.75rem' }}>AI Guidance</Badge>
+                      <div>{aiAppGuidance}</div>
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: 'center' }}>
+                      Specific channel partner data is not available. Please refer to the official portal or ask SCHEMORA below for general application guidance.
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -201,11 +344,25 @@ export function SchemeDetailModal({ result, onClose }: Props) {
                 </li>
               ))}
             </ul>
-          ) : (
-            <div style={{ padding: '1rem 0', color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-              Verified document checklist is not currently available in SCHEMORA for this scheme.
-            </div>
-          )}
+              ) : (
+                <div style={{ padding: '1.25rem', color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem', backgroundColor: 'var(--bg-secondary)', borderRadius: 'var(--radius-sm)' }}>
+                  {isAiDocLoading ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)' }}>
+                      <span className={styles.typingIndicator}>...</span>
+                      Generating guidance...
+                    </div>
+                  ) : aiDocGuidance ? (
+                    <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.5 }}>
+                      <Badge variant="warning" style={{ marginBottom: '0.75rem' }}>AI Guidance</Badge>
+                      <div>{aiDocGuidance}</div>
+                    </div>
+                  ) : (
+                    <div>
+                      A scheme-specific verified document checklist is not currently available. Please ask SCHEMORA below for general guidance on standard documents.
+                    </div>
+                  )}
+                </div>
+              )}
 
           <h3 className={styles.sectionTitle}>Ask SCHEMORA</h3>
           <div className={styles.chatContainer}>
