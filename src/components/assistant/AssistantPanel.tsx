@@ -36,6 +36,7 @@ export const AssistantPanel = () => {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [playingMessageId, setPlayingMessageId] = useState<string | null>(null);
+  const [hasSpeech, setHasSpeech] = useState(false);
   
   const { language, t } = useTranslation();
 
@@ -46,6 +47,12 @@ export const AssistantPanel = () => {
   ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      setHasSpeech(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -140,7 +147,7 @@ export const AssistantPanel = () => {
                     </React.Fragment>
                   ))}
                 </div>
-                {msg.sender === 'ai' && (
+                {msg.sender === 'ai' && hasSpeech && (
                   <button 
                     className={styles.ttsButton}
                     onClick={() => {
@@ -149,7 +156,22 @@ export const AssistantPanel = () => {
                         setPlayingMessageId(null);
                       } else {
                         setPlayingMessageId(msg.id);
-                        playSpeech(msg.text, () => setPlayingMessageId(null));
+                        playSpeech(
+                          msg.id, 
+                          msg.text, 
+                          language, 
+                          () => setPlayingMessageId(null),
+                          (err) => {
+                            if (err.includes("not configured")) {
+                              alert("TTS provider credentials are not configured.");
+                            } else if (err.includes("Unsupported language")) {
+                              alert("Audio unavailable for this language right now.");
+                            } else {
+                              alert("Failed to generate audio. Please try again later.");
+                            }
+                            setPlayingMessageId(null);
+                          }
+                        );
                       }
                     }}
                     aria-label={playingMessageId === msg.id ? "Pause response" : "Listen to response"}

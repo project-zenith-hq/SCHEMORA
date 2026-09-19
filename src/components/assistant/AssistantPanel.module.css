@@ -157,9 +157,9 @@
 }
 
 .ttsButton:hover {
-  background: var(--accent-amber);
+  background: var(--accent);
   color: var(--bg-primary);
-  border-color: var(--accent-amber);
+  border-color: var(--accent);
 }
 
 .ttsButton:active {
