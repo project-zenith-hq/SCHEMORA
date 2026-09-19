@@ -183,7 +183,7 @@ export function SchemeDetailModal({ result, onClose }: Props) {
               </table>
             ) : (
               <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)', backgroundColor: 'var(--bg-secondary)' }}>
-                Channel partner data not yet available for this scheme.
+                Verified channel partner data is not currently available in SCHEMORA for this scheme.
               </div>
             )}
           </div>
@@ -203,7 +203,7 @@ export function SchemeDetailModal({ result, onClose }: Props) {
             </ul>
           ) : (
             <div style={{ padding: '1rem 0', color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '1rem' }}>
-              Document checklist not yet available for this scheme.
+              Verified document checklist is not currently available in SCHEMORA for this scheme.
             </div>
           )}
 
