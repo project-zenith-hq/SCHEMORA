@@ -36,9 +36,13 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
       const storedMotion = localStorage.getItem('schemora_motion');
       const storedLang = localStorage.getItem('schemora_language');
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedTheme) setThemeState(storedTheme);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedDensity) setDensityState(storedDensity);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedMotion) setReduceMotionState(storedMotion === 'true');
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (storedLang) setLanguageState(storedLang);
     } catch (e) {
       console.warn('Failed to read settings from localStorage', e);

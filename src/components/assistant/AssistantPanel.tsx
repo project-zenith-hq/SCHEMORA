@@ -71,7 +71,7 @@ export const AssistantPanel = () => {
   const handleSend = async (text: string) => {
     if (!text.trim()) return;
 
-    const userMsg: Message = { id: Date.now().toString(), sender: 'user', text };
+    const userMsg: Message = { id: crypto.randomUUID(), sender: 'user', text };
     setMessages(prev => [...prev, userMsg]);
     setInputValue("");
     setIsTyping(true);
@@ -89,13 +89,13 @@ export const AssistantPanel = () => {
         throw new Error(data.error || 'Failed to fetch response');
       }
 
-      const aiMsg: Message = { id: (Date.now() + 1).toString(), sender: 'ai', text: data.response };
+      const aiMsg: Message = { id: crypto.randomUUID(), sender: 'ai', text: data.response };
       setMessages(prev => [...prev, aiMsg]);
-    } catch (error: any) {
+    } catch (error) {
       const errorMsg: Message = { 
-        id: (Date.now() + 1).toString(), 
+        id: crypto.randomUUID(), 
         sender: 'ai', 
-        text: error.message || "I'm currently unavailable. Please try again later." 
+        text: error instanceof Error ? error.message : "I'm currently unavailable. Please try again later." 
       };
       setMessages(prev => [...prev, errorMsg]);
     } finally {

@@ -24,6 +24,7 @@ export function TranslationProvider({ children }: { children: ReactNode }) {
     try {
       const storedLang = localStorage.getItem('schemora_language');
       if (storedLang) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLanguageState(storedLang);
       }
     } catch (e) {

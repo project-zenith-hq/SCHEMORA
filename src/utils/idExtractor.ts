@@ -82,7 +82,7 @@ export const extractFromText = (text: string): ExtractedData => {
   const addressIndex = lines.findIndex(l => /address/i.test(l));
   if (addressIndex !== -1 && addressIndex + 1 < lines.length) {
     // Take the next few lines as address, stopping if we hit another label or something looking like a different section
-    let addressLines = [];
+    const addressLines = [];
     for (let i = addressIndex; i < lines.length && i < addressIndex + 4; i++) {
       const line = lines[i].replace(/address[\s:]*/i, '').trim();
       if (line.length > 0) addressLines.push(line);
@@ -94,7 +94,7 @@ export const extractFromText = (text: string): ExtractedData => {
     // Look for Care of / S/O / D/O / W/O pattern
     const careOfIndex = lines.findIndex(l => /(C\/O|S\/O|D\/O|W\/O)/i.test(l));
     if (careOfIndex !== -1) {
-      let addressLines = [];
+      const addressLines = [];
       for (let i = careOfIndex; i < lines.length && i < careOfIndex + 4; i++) {
         addressLines.push(lines[i]);
       }
@@ -151,7 +151,7 @@ export const extractFromQR = (qrData: string): ExtractedData => {
     if (stateMatch) data.state = stateMatch[1];
     
     // Construct address if available
-    let addressParts = [];
+    const addressParts = [];
     if (coMatch) addressParts.push(coMatch[1]);
     if (locMatch) addressParts.push(locMatch[1]);
     if (vtcMatch) addressParts.push(vtcMatch[1]);

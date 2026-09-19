@@ -24,16 +24,17 @@ export function cleanTextForSpeech(text: string): string {
 
 let currentPlayingId: string | null = null;
 let onFinishCallback: (() => void) | null = null;
+const isManualStopRef = { current: false };
 
 export function stopSpeech() {
+  isManualStopRef.current = true;
   if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
   currentPlayingId = null;
-  if (onFinishCallback) {
-    onFinishCallback();
-    onFinishCallback = null;
-  }
+  // If we manually stopped, we shouldn't trigger the natural finish callback
+  onFinishCallback = null;
+  isManualStopRef.current = false;
 }
 
 // Map site language codes to BCP-47 codes
@@ -52,7 +53,8 @@ export async function playSpeech(
   text: string, 
   language: string = 'en', 
   onFinish?: () => void,
-  onError?: (err: string) => void
+  onError?: (err: string) => void,
+  preferFemale: boolean = false
 ) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
     if (onError) onError("Speech Synthesis is not supported in this browser.");
@@ -80,13 +82,31 @@ export async function playSpeech(
     // Attempt to find best voice matching language
     const voices = window.speechSynthesis.getVoices();
     if (voices.length > 0) {
-      const voice = voices.find(v => v.lang.startsWith(bcp47Lang) || v.lang.startsWith(bcp47Lang.split('-')[0]));
-      if (voice) {
-        utterance.voice = voice;
+      const langVoices = voices.filter(v => v.lang.startsWith(bcp47Lang) || v.lang.startsWith(bcp47Lang.split('-')[0]));
+      let selectedVoice = langVoices[0];
+      
+      if (preferFemale && langVoices.length > 0) {
+        const femaleVoice = langVoices.find(v => 
+          v.name.toLowerCase().includes('female') || 
+          v.name.toLowerCase().includes('zira') || 
+          v.name.toLowerCase().includes('samantha') || 
+          v.name.toLowerCase().includes('victoria')
+        );
+        if (femaleVoice) {
+          selectedVoice = femaleVoice;
+        }
+      }
+      
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      } else if (voices.length > 0) {
+        // Fallback to any voice if no language match
+        utterance.voice = voices.find(v => preferFemale ? v.name.toLowerCase().includes('female') : true) || voices[0];
       }
     }
 
     utterance.onend = () => {
+      if (isManualStopRef.current) return;
       if (currentPlayingId === messageId) {
         currentPlayingId = null;
         if (onFinishCallback) {
@@ -97,19 +117,21 @@ export async function playSpeech(
     };
 
     utterance.onerror = (e) => {
-      console.error("Speech Synthesis Error:", e);
-      // 'canceled' is fired when stopSpeech() cancels the speech, which is not an actual error to show
-      if (e.error !== 'canceled') {
-        if (onError) onError("Failed to play audio");
+      const benignReasons = ['canceled', 'interrupted'];
+      if (benignReasons.includes(e.error)) {
+        if (isManualStopRef.current) return;
+        return;
       }
+      console.error("Speech Synthesis Error:", e.error || e);
+      if (onError) onError("Failed to play audio");
       stopSpeech();
     };
 
     window.speechSynthesis.speak(utterance);
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("TTS Error:", error);
-    if (onError) onError(error.message || "Failed to generate speech");
+    if (onError) onError(error instanceof Error ? error.message : "Failed to generate speech");
     stopSpeech();
   }
 }

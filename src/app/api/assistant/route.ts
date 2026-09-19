@@ -65,15 +65,19 @@ export async function POST(req: Request) {
 
     // 2. Input Validation
     const body = await req.json();
-    const { message, language } = body;
+    const { message, language, isVoice } = body;
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Invalid message format.' }, { status: 400 });
     }
 
-    const effectivePrompt = language 
+    let effectivePrompt = language 
       ? `${SYSTEM_PROMPT}\n\nThe user's preferred UI language is ${language}. Please prioritize responding in this language unless the user specifically asks otherwise.`
       : SYSTEM_PROMPT;
+      
+    if (isVoice) {
+      effectivePrompt += `\n\nKeep responses brief and conversational, 2-3 sentences, since this will be read aloud — avoid long lists or dense text that doesn't work well as speech.`;
+    }
 
     if (message.length > MAX_MESSAGE_LENGTH) {
       return NextResponse.json(

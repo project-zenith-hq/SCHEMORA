@@ -5,6 +5,7 @@ import { AssessmentProvider } from "@/context/AssessmentContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AssistantPanel } from "@/components/assistant/AssistantPanel";
+import { VoiceAssistant } from "@/components/assistant/VoiceAssistant";
 import { JourneyTrackerWrapper } from "@/components/layout/JourneyTrackerWrapper";
 import { SettingsProvider } from "@/context/SettingsContext";
 import { TranslationProvider } from "@/context/TranslationContext";
@@ -47,6 +48,7 @@ export default function RootLayout({
               </main>
               <Footer />
               <AssistantPanel />
+              <VoiceAssistant />
               <SettingsPanel />
             </AssessmentProvider>
           </TranslationProvider>
